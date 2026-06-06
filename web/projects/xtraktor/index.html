@@ -1,18 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>xtraktor</title>
-  <link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xtraktor - Document and Data Extraction</title>
+  <meta
+    name="description"
+    content="Xtraktor extracts structured signals from PDFs, handover files, and operational documentation to feed better real estate data workflows."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-  <header>
-    <h1>xtraktor</h1>
-    <a href="/">Home</a>
-  </header>
-  <main>
-    <p>Project description here.</p>
-  </main>
+  <div class="site-shell">
+    <div class="ambient ambient-a" aria-hidden="true"></div>
+    <div class="ambient ambient-b" aria-hidden="true"></div>
+    <div class="grid-glow" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="/" aria-label="BIMfabrik home">
+          <span class="brand-mark"></span>
+          <span class="brand-copy">
+            <strong>BIMfabrik Copilot</strong>
+            <span>Real estate lifecycle intelligence</span>
+          </span>
+        </a>
+        <a class="button button-secondary" href="/">Back to Home</a>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="hero hero-compact">
+        <div class="wrap project-hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Structured extraction for messy source files
+            </div>
+            <h1>Xtraktor</h1>
+            <p class="hero-text">
+              A document extraction layer built for PDFs, schedules, handover packages, and semi-structured
+              operational records that need to become usable real-estate data.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="/#waitlist">Request Access</a>
+              <a class="button button-secondary" href="/">Back to Home</a>
+            </div>
+            <div class="hero-proof hero-proof-two">
+              <div class="proof-card">
+                <strong>Document-to-data</strong>
+                <span>Turn tables, tags, and narrative text into structured records.</span>
+              </div>
+              <div class="proof-card">
+                <strong>Quality checks</strong>
+                <span>Catch missing fields, duplicates, and unsupported outputs before import.</span>
+              </div>
+            </div>
+          </div>
+
+          <section class="project-preview dashboard-card">
+            <p class="kpi-label">Extraction console</p>
+            <h2>Move from raw files to trusted datasets</h2>
+            <div class="project-preview-grid">
+              <div class="project-preview-card tall">
+                <strong>1,240 records parsed</strong>
+                <p>Asset tags, room schedules, warranty details, and maintenance references normalized for review.</p>
+              </div>
+              <div class="project-preview-card stack">
+                <div>
+                  <strong>94% field match</strong>
+                  <p>High-confidence extraction for repeatable templates and common document patterns.</p>
+                </div>
+                <div>
+                  <strong>32 exceptions flagged</strong>
+                  <p>Items requiring validation before they enter the main property graph.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="project-section">
+        <div class="wrap section-stack">
+          <div class="stat-strip">
+            <article><strong>PDF extraction</strong><span>Pull useful structure from handover packs, O&M files, and schedules.</span></article>
+            <article><strong>Schema mapping</strong><span>Map extracted content into sites, spaces, assets, vendors, and documents.</span></article>
+            <article><strong>Review workflows</strong><span>Route low-confidence items to a human instead of silently accepting errors.</span></article>
+            <article><strong>System feed</strong><span>Prepare clean outputs for BIMfabrik Copilot and downstream operational tools.</span></article>
+          </div>
+
+          <div class="detail-grid">
+            <article class="detail-card">
+              <h3>Why it matters</h3>
+              <p>
+                Most lifecycle data problems start upstream in messy source material. Xtraktor reduces manual
+                cleanup by creating a faster path from document chaos to structured operational value.
+              </p>
+            </article>
+            <article class="detail-card">
+              <h3>How it fits the product family</h3>
+              <p>
+                It acts as an ingestion engine for the broader platform, helping teams bootstrap data quality
+                before dashboards, workflows, and agents are asked to do their job.
+              </p>
+            </article>
+          </div>
+
+          <div class="timeline-grid">
+            <article class="timeline-card">
+              <em>Ingest</em>
+              <h3>Read diverse source files</h3>
+              <p>Bring in scans, exports, schedules, and mixed-format operational documents.</p>
+            </article>
+            <article class="timeline-card">
+              <em>Normalize</em>
+              <h3>Turn fragments into structure</h3>
+              <p>Map extracted signals into consistent fields that match real-estate lifecycle entities.</p>
+            </article>
+            <article class="timeline-card">
+              <em>Validate</em>
+              <h3>Approve what matters</h3>
+              <p>Keep a review step for sensitive records, low-confidence matches, and business-critical data.</p>
+            </article>
+          </div>
+
+          <a class="button button-secondary section-backlink" href="/">Back to homepage</a>
+        </div>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
