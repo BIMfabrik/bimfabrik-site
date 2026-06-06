@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BIMfabrik Copilot - Real Estate Lifecycle Data Management</title>
+  <title>RealEstateSignal - Real Estate Lifecycle Data Management</title>
   <meta
     name="description"
     content="A premium operating layer for real estate lifecycle data management across acquisitions, design, delivery, operations, compliance, and portfolio reporting."
+    data-i18n-content="description"
   />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +17,7 @@
   />
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
+<body data-page="home">
   <div class="site-shell">
     <div class="ambient ambient-a" aria-hidden="true"></div>
     <div class="ambient ambient-b" aria-hidden="true"></div>
@@ -24,22 +25,31 @@
 
     <header class="topbar">
       <div class="wrap topbar-inner">
-        <a class="brand" href="#top" aria-label="BIMfabrik Copilot home">
+        <a class="brand" href="#top" aria-label="RealEstateSignal home">
           <span class="brand-mark"></span>
           <span class="brand-copy">
-            <strong>BIMfabrik Copilot</strong>
-            <span>Real estate lifecycle intelligence</span>
+            <strong>RealEstateSignal</strong>
+            <span data-i18n="brandTag">Real estate lifecycle intelligence</span>
           </span>
         </a>
 
         <nav class="main-nav" aria-label="Primary">
-          <a href="#platform">Platform</a>
-          <a href="#lifecycle">Lifecycle</a>
-          <a href="#dashboards">Dashboards</a>
-          <a href="#waitlist">Waitlist</a>
+          <a href="#platform" data-i18n="navPlatform">Platform</a>
+          <a href="#lifecycle" data-i18n="navLifecycle">Lifecycle</a>
+          <a href="#showcases" data-i18n="navShowcases">Showcases</a>
+          <a href="#waitlist" data-i18n="navWaitlist">Waitlist</a>
         </nav>
 
-        <a class="button button-primary topbar-cta" href="#waitlist">Request Access</a>
+        <div class="topbar-actions">
+          <button class="button lang-toggle" type="button" data-lang-toggle aria-label="Toggle German and English">
+            <span data-lang-label>EN</span>
+          </button>
+          <button class="button theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark mode">
+            <span class="theme-icon" data-theme-icon>◐</span>
+            <span data-theme-label>Dark</span>
+          </button>
+          <a class="button button-primary topbar-cta" href="#waitlist" data-i18n="ctaRequest">Request Access</a>
+        </div>
       </div>
     </header>
 
@@ -49,34 +59,32 @@
           <div class="hero-copy">
             <div class="eyebrow">
               <span class="eyebrow-dot"></span>
-              Built for asset owners, operators, and portfolio teams
+              <span data-i18n="heroEyebrow">Built for asset owners, operators, and portfolio teams</span>
             </div>
 
-            <h1>Make every building decision from one living data layer.</h1>
+            <h1 data-i18n="heroTitle">Make every building decision from one living data layer.</h1>
 
-            <p class="hero-text">
-              BIMfabrik Copilot brings together acquisition files, BIM, asset registers,
-              capex plans, compliance records, maintenance history, and portfolio metrics
-              into one high-clarity operating system for the full real estate lifecycle.
+            <p class="hero-text" data-i18n="heroText">
+              RealEstateSignal brings together acquisition files, BIM, asset registers, capex plans, compliance records, maintenance history, and portfolio metrics into one high-clarity operating system for the full real estate lifecycle.
             </p>
 
             <div class="hero-actions">
-              <a class="button button-primary" href="#waitlist">Join Early Access</a>
-              <a class="button button-secondary" href="#platform">Explore Platform</a>
+              <a class="button button-primary" href="#waitlist" data-i18n="heroPrimary">Join Early Access</a>
+              <a class="button button-secondary" href="#showcases" data-i18n="heroSecondary">Explore Showcases</a>
             </div>
 
             <div class="hero-proof">
               <div class="proof-card">
-                <strong>Lifecycle coverage</strong>
-                <span>Acquisition to operations</span>
+                <strong data-i18n="proof1Title">Lifecycle coverage</strong>
+                <span data-i18n="proof1Text">Acquisition to operations</span>
               </div>
               <div class="proof-card">
-                <strong>AI-assisted workflows</strong>
-                <span>Reviews, exceptions, follow-ups</span>
+                <strong data-i18n="proof2Title">AI-assisted workflows</strong>
+                <span data-i18n="proof2Text">Reviews, exceptions, follow-ups</span>
               </div>
               <div class="proof-card">
-                <strong>Executive-ready dashboards</strong>
-                <span>Portfolio, risk, cost, compliance</span>
+                <strong data-i18n="proof3Title">Executive-ready dashboards</strong>
+                <span data-i18n="proof3Text">Portfolio, risk, cost, compliance</span>
               </div>
             </div>
           </div>
@@ -85,35 +93,35 @@
             <section class="dashboard-card dashboard-main">
               <div class="dashboard-head">
                 <div>
-                  <p class="kpi-label">Portfolio command</p>
-                  <h2>Lifecycle Performance</h2>
+                  <p class="kpi-label" data-i18n="dashLabel">Portfolio command</p>
+                  <h2 data-i18n="dashTitle">Lifecycle Performance</h2>
                 </div>
-                <div class="status-pill">Live data layer</div>
+                <div class="status-pill" data-i18n="dashStatus">Live data layer</div>
               </div>
 
               <div class="dashboard-metrics">
                 <article class="metric-card">
-                  <span>Properties mapped</span>
+                  <span data-i18n="metric1Label">Properties mapped</span>
                   <strong>148</strong>
-                  <em>Across office, residential, mixed-use</em>
+                  <em data-i18n="metric1Meta">Across office, residential, mixed-use</em>
                 </article>
                 <article class="metric-card">
-                  <span>Compliance completeness</span>
+                  <span data-i18n="metric2Label">Compliance completeness</span>
                   <strong>92.4%</strong>
-                  <em>+6.8% in the last quarter</em>
+                  <em data-i18n="metric2Meta">+6.8% in the last quarter</em>
                 </article>
                 <article class="metric-card">
-                  <span>Capex at risk</span>
+                  <span data-i18n="metric3Label">Capex at risk</span>
                   <strong>CHF 4.1M</strong>
-                  <em>17 items require review</em>
+                  <em data-i18n="metric3Meta">17 items require review</em>
                 </article>
               </div>
 
               <div class="chart-panel">
                 <div class="chart-copy">
-                  <p class="kpi-label">Portfolio health trend</p>
-                  <strong>Risk, cost, readiness</strong>
-                  <span>Track the operational state of each asset through delivery and into steady-state operations.</span>
+                  <p class="kpi-label" data-i18n="chartLabel">Portfolio health trend</p>
+                  <strong data-i18n="chartTitle">Risk, cost, readiness</strong>
+                  <span data-i18n="chartText">Track the operational state of each asset through delivery and into steady-state operations.</span>
                 </div>
                 <div class="chart-area" aria-hidden="true">
                   <div class="chart-line chart-line-a"></div>
@@ -124,45 +132,45 @@
 
               <div class="dashboard-table">
                 <div class="table-head">
-                  <span>Asset</span>
-                  <span>Stage</span>
-                  <span>Data confidence</span>
+                  <span data-i18n="tableAsset">Asset</span>
+                  <span data-i18n="tableStage">Stage</span>
+                  <span data-i18n="tableConfidence">Data confidence</span>
                 </div>
                 <div class="table-row">
                   <span>Zurich West Campus</span>
-                  <span>Operations</span>
+                  <span data-i18n="stageOperations">Operations</span>
                   <span class="good">97%</span>
                 </div>
                 <div class="table-row">
                   <span>Geneva Riverside</span>
-                  <span>Fit-out</span>
+                  <span data-i18n="stageFitout">Fit-out</span>
                   <span class="warn">81%</span>
                 </div>
                 <div class="table-row">
                   <span>Basel Industrial Hub</span>
-                  <span>Due diligence</span>
+                  <span data-i18n="stageDueDiligence">Due diligence</span>
                   <span class="bad">68%</span>
                 </div>
               </div>
             </section>
 
             <section class="dashboard-card dashboard-side dashboard-side-top">
-              <p class="kpi-label">Agent workflows</p>
-              <strong>Auto-review lease packs, O&M documents, and asset records.</strong>
+              <p class="kpi-label" data-i18n="agentLabel">Agent workflows</p>
+              <strong data-i18n="agentTitle">Auto-review lease packs, O&amp;M documents, and asset records.</strong>
               <ul class="mini-list">
-                <li>Flag missing handover data</li>
-                <li>Summarize vendor obligations</li>
-                <li>Create action queues for site teams</li>
+                <li data-i18n="agent1">Flag missing handover data</li>
+                <li data-i18n="agent2">Summarize vendor obligations</li>
+                <li data-i18n="agent3">Create action queues for site teams</li>
               </ul>
             </section>
 
             <section class="dashboard-card dashboard-side dashboard-side-bottom">
-              <p class="kpi-label">Data pipeline</p>
+              <p class="kpi-label" data-i18n="pipelineLabel">Data pipeline</p>
               <div class="pipeline-list">
-                <div><span></span>Acquisition files</div>
-                <div><span></span>BIM and CAD</div>
-                <div><span></span>CMMS / CAFM / IWMS</div>
-                <div><span></span>Compliance evidence</div>
+                <div><span></span><span data-i18n="pipeline1">Acquisition files</span></div>
+                <div><span></span><span data-i18n="pipeline2">BIM and CAD</span></div>
+                <div><span></span><span data-i18n="pipeline3">CMMS / CAFM / IWMS</span></div>
+                <div><span></span><span data-i18n="pipeline4">Compliance evidence</span></div>
               </div>
             </section>
           </div>
@@ -172,40 +180,34 @@
       <section class="platform-section" id="platform">
         <div class="wrap">
           <div class="section-heading">
-            <span>Platform</span>
-            <h2>A premium control layer for fragmented real estate data.</h2>
-            <p>
-              Inspired by modern dashboard products, but tuned for buildings: cleaner structure,
-              richer context, and less noise between a problem and the action needed to solve it.
-            </p>
+            <span data-i18n="platformLabel">Platform</span>
+            <h2 data-i18n="platformTitle">A premium control layer for fragmented real estate data.</h2>
+            <p data-i18n="platformText">Inspired by modern dashboard products, but tuned for buildings: cleaner structure, richer context, and less noise between a problem and the action needed to solve it.</p>
           </div>
 
           <div class="feature-grid">
             <article class="feature-card feature-card-large">
               <div class="feature-icon">01</div>
-              <h3>Unified property graph</h3>
-              <p>
-                Connect sites, spaces, assets, documents, warranties, vendors, projects,
-                budgets, and performance history in one navigable model.
-              </p>
+              <h3 data-i18n="feature1Title">Unified property graph</h3>
+              <p data-i18n="feature1Text">Connect sites, spaces, assets, documents, warranties, vendors, projects, budgets, and performance history in one navigable model.</p>
             </article>
 
             <article class="feature-card">
               <div class="feature-icon">02</div>
-              <h3>Lifecycle dashboards</h3>
-              <p>Monitor readiness, compliance, spend, backlog, energy, and portfolio risk by asset or region.</p>
+              <h3 data-i18n="feature2Title">Lifecycle dashboards</h3>
+              <p data-i18n="feature2Text">Monitor readiness, compliance, spend, backlog, energy, and portfolio risk by asset or region.</p>
             </article>
 
             <article class="feature-card">
               <div class="feature-icon">03</div>
-              <h3>AI operational copilots</h3>
-              <p>Automate reviews, summarize data gaps, and generate follow-up tasks with human approval built in.</p>
+              <h3 data-i18n="feature3Title">AI operational copilots</h3>
+              <p data-i18n="feature3Text">Automate reviews, summarize data gaps, and generate follow-up tasks with human approval built in.</p>
             </article>
 
             <article class="feature-card">
               <div class="feature-icon">04</div>
-              <h3>Data confidence scoring</h3>
-              <p>See where records are incomplete, outdated, duplicated, or unsupported by evidence.</p>
+              <h3 data-i18n="feature4Title">Data confidence scoring</h3>
+              <p data-i18n="feature4Text">See where records are incomplete, outdated, duplicated, or unsupported by evidence.</p>
             </article>
           </div>
         </div>
@@ -214,30 +216,27 @@
       <section class="lifecycle-section" id="lifecycle">
         <div class="wrap lifecycle-grid">
           <div class="section-heading compact">
-            <span>Lifecycle</span>
-            <h2>Designed around how real estate actually moves.</h2>
-            <p>
-              From acquisition and due diligence to project delivery and long-term operations,
-              the platform keeps data structured as buildings change hands, systems, and states.
-            </p>
+            <span data-i18n="lifeLabel">Lifecycle</span>
+            <h2 data-i18n="lifeTitle">Designed around how real estate actually moves.</h2>
+            <p data-i18n="lifeText">From acquisition and due diligence to project delivery and long-term operations, the platform keeps data structured as buildings change hands, systems, and states.</p>
           </div>
 
           <div class="lifecycle-panel">
             <div class="lifecycle-step">
-              <strong>Acquire</strong>
-              <span>Collect diligence packs, condition data, lease obligations, and risk signals.</span>
+              <strong data-i18n="stepAcquireTitle">Acquire</strong>
+              <span data-i18n="stepAcquireText">Collect diligence packs, condition data, lease obligations, and risk signals.</span>
             </div>
             <div class="lifecycle-step">
-              <strong>Deliver</strong>
-              <span>Track BIM handover, commissioning evidence, defect status, and readiness gates.</span>
+              <strong data-i18n="stepDeliverTitle">Deliver</strong>
+              <span data-i18n="stepDeliverText">Track BIM handover, commissioning evidence, defect status, and readiness gates.</span>
             </div>
             <div class="lifecycle-step">
-              <strong>Operate</strong>
-              <span>Manage asset records, preventive workflows, compliance calendars, and vendor performance.</span>
+              <strong data-i18n="stepOperateTitle">Operate</strong>
+              <span data-i18n="stepOperateText">Manage asset records, preventive workflows, compliance calendars, and vendor performance.</span>
             </div>
             <div class="lifecycle-step">
-              <strong>Improve</strong>
-              <span>Drive capex prioritization, sustainability upgrades, and portfolio reporting from the same base.</span>
+              <strong data-i18n="stepImproveTitle">Improve</strong>
+              <span data-i18n="stepImproveText">Drive capex prioritization, sustainability upgrades, and portfolio reporting from the same base.</span>
             </div>
           </div>
         </div>
@@ -246,70 +245,82 @@
       <section class="insight-section">
         <div class="wrap insight-grid">
           <article class="insight-card">
-            <span class="insight-tag">For operations</span>
-            <h3>See what is missing before it becomes a site problem.</h3>
-            <p>
-              Surface incomplete compliance records, missing O&M documentation, repeated failures,
-              and unresolved vendor actions before they roll into reporting cycles.
-            </p>
+            <span class="insight-tag" data-i18n="opsTag">For operations</span>
+            <h3 data-i18n="opsTitle">See what is missing before it becomes a site problem.</h3>
+            <p data-i18n="opsText">Surface incomplete compliance records, missing O&amp;M documentation, repeated failures, and unresolved vendor actions before they roll into reporting cycles.</p>
           </article>
 
           <article class="insight-card accent">
-            <span class="insight-tag">For leadership</span>
-            <h3>Move from static reports to live portfolio intelligence.</h3>
-            <p>
-              Give investment, asset management, and executive teams a sharper view of operating risk,
-              capex exposure, asset readiness, and portfolio-level trends.
-            </p>
+            <span class="insight-tag" data-i18n="leadTag">For leadership</span>
+            <h3 data-i18n="leadTitle">Move from static reports to live portfolio intelligence.</h3>
+            <p data-i18n="leadText">Give investment, asset management, and executive teams a sharper view of operating risk, capex exposure, asset readiness, and portfolio-level trends.</p>
           </article>
         </div>
       </section>
 
-      <section class="platform-section">
+      <section class="platform-section" id="showcases">
         <div class="wrap">
           <div class="section-heading">
-            <span>Projects</span>
-            <h2>Focused products around the same data foundation.</h2>
-            <p>
-              Each subpage explores a sharper use case inside the broader BIMfabrik ecosystem,
-              from pipeline intelligence to extraction and BIM-led handover workflows.
-            </p>
+            <span data-i18n="showLabel">Showcases</span>
+            <h2 data-i18n="showTitle">Focused product surfaces built on the same real-estate data foundation.</h2>
+            <p data-i18n="showText">Three showcase tracks make the platform story more tangible: a core platform surface, plus two near-term product directions for process twins and building-data QA workflows.</p>
           </div>
 
-          <div class="feature-grid">
-            <article class="feature-card">
-              <div class="feature-icon">GR</div>
-              <h3>Genossenschaftsradar</h3>
-              <p>Track cooperative housing opportunities, project signals, and research workflows.</p>
+          <div class="showcase-grid">
+            <article class="showcase-card showcase-card-primary">
+              <div class="showcase-head">
+                <div>
+                  <span class="insight-tag" data-i18n="show1Tag">Core showcase</span>
+                  <h3 data-i18n="show1Title">Building Data Hub</h3>
+                </div>
+                <div class="status-pill">Stage one</div>
+              </div>
+              <p data-i18n="show1Text">A neutral product surface for structured building records, operational context, portfolio overview, and connected lifecycle data. This gives the site a concrete anchor without locking the naming too early.</p>
+              <div class="showcase-meta">
+                <div><strong data-i18n="show1FocusTitle">Focus</strong><span data-i18n="show1FocusText">Building records, operations, portfolio context</span></div>
+                <div><strong data-i18n="show1StageTitle">Stage</strong><span data-i18n="show1StageText">Static showcase</span></div>
+                <div><strong data-i18n="show1RoleTitle">Role</strong><span data-i18n="show1RoleText">Anchor product story for the website</span></div>
+              </div>
               <div class="hero-actions">
-                <a class="button button-secondary" href="/projects/genossenschaftsradar/">Open Project</a>
+                <a class="button button-primary" href="/projects/building-data-hub/" data-i18n="showOpen">Open Showcase</a>
               </div>
             </article>
 
-            <article class="feature-card">
-              <div class="feature-icon">XT</div>
-              <h3>Xtraktor</h3>
-              <p>Extract structure from PDFs, handover packages, and messy operational source files.</p>
+            <article class="showcase-card">
+              <div class="showcase-head">
+                <div>
+                  <span class="insight-tag" data-i18n="show2Tag">Placeholder</span>
+                  <h3 data-i18n="show2Title">FlowTwin</h3>
+                </div>
+                <div class="status-pill">Concept stage</div>
+              </div>
+              <p data-i18n="show2Text">A future product direction for modeling operating processes as a live twin: workflows, approvals, dependencies, owners, and friction points across delivery and operations.</p>
+              <div class="showcase-meta">
+                <div><strong data-i18n="show1FocusTitle">Focus</strong><span data-i18n="show2FocusText">Workflow twins, orchestration, process visibility</span></div>
+                <div><strong data-i18n="show1StageTitle">Stage</strong><span data-i18n="show2StageText">Static placeholder</span></div>
+                <div><strong data-i18n="show1RoleTitle">Role</strong><span data-i18n="show2RoleText">Show strategic expansion beyond asset records</span></div>
+              </div>
               <div class="hero-actions">
-                <a class="button button-secondary" href="/projects/xtraktor/">Open Project</a>
+                <a class="button button-secondary" href="/projects/flowtwin/" data-i18n="showPlaceholder">Open Placeholder</a>
               </div>
             </article>
 
-            <article class="feature-card">
-              <div class="feature-icon">BC</div>
-              <h3>BIM Copilot</h3>
-              <p>Connect BIM, handover readiness, and model-linked asset workflows after delivery.</p>
-              <div class="hero-actions">
-                <a class="button button-secondary" href="/projects/bim-copilot/">Open Project</a>
+            <article class="showcase-card">
+              <div class="showcase-head">
+                <div>
+                  <span class="insight-tag" data-i18n="show2Tag">Placeholder</span>
+                  <h3 data-i18n="show3Title">ProofGrid</h3>
+                </div>
+                <div class="status-pill">Concept stage</div>
               </div>
-            </article>
-
-            <article class="feature-card">
-              <div class="feature-icon">FA</div>
-              <h3>Famili</h3>
-              <p>Apply the same calm information design to household coordination and home operations.</p>
+              <p data-i18n="show3Text">A product direction for QA of building data: handover completeness, rule checks, evidence quality, and operational readiness across assets and spaces.</p>
+              <div class="showcase-meta">
+                <div><strong data-i18n="show1FocusTitle">Focus</strong><span data-i18n="show3FocusText">Building-data QA, rule checks, evidence, readiness</span></div>
+                <div><strong data-i18n="show1StageTitle">Stage</strong><span data-i18n="show2StageText">Static placeholder</span></div>
+                <div><strong data-i18n="show1RoleTitle">Role</strong><span data-i18n="show3RoleText">Show quality-control and governance capability</span></div>
+              </div>
               <div class="hero-actions">
-                <a class="button button-secondary" href="/projects/famili/">Open Project</a>
+                <a class="button button-secondary" href="/projects/proofgrid/" data-i18n="showPlaceholder">Open Placeholder</a>
               </div>
             </article>
           </div>
@@ -319,30 +330,27 @@
       <section class="waitlist-section" id="waitlist">
         <div class="wrap waitlist-shell">
           <div class="waitlist-copy">
-            <span>Early access</span>
-            <h2>Talk to us about pilots, design partnerships, and first deployments.</h2>
-            <p>
-              We are shaping BIMfabrik Copilot with teams that need stronger lifecycle visibility
-              across real estate, facilities, and portfolio management.
-            </p>
+            <span data-i18n="waitTag">Early access</span>
+            <h2 data-i18n="waitTitle">Talk to us about pilots, design partnerships, and first deployments.</h2>
+            <p data-i18n="waitText">We are shaping RealEstateSignal with teams that need stronger lifecycle visibility across real estate, facilities, and portfolio management.</p>
           </div>
 
           <form class="waitlist-form" action="https://formspree.io/f/xzdanybz" method="POST">
             <label>
-              <span>Name</span>
-              <input name="name" type="text" placeholder="Your name" required />
+              <span data-i18n="nameLabel">Name</span>
+              <input name="name" type="text" placeholder="Your name" data-i18n-placeholder="namePlaceholder" required />
             </label>
             <label>
-              <span>Work email</span>
-              <input name="email" type="email" placeholder="name@company.com" required />
+              <span data-i18n="emailLabel">Work email</span>
+              <input name="email" type="email" placeholder="name@company.com" data-i18n-placeholder="emailPlaceholder" required />
             </label>
             <label>
-              <span>Company</span>
-              <input name="company" type="text" placeholder="Company or portfolio" />
+              <span data-i18n="companyLabel">Company</span>
+              <input name="company" type="text" placeholder="Company or portfolio" data-i18n-placeholder="companyPlaceholder" />
             </label>
-            <input type="hidden" name="product" value="BIMfabrik Copilot waitlist" />
+            <input type="hidden" name="product" value="RealEstateSignal waitlist" />
             <input type="hidden" name="_redirect" value="/thanks.html" />
-            <button class="button button-primary" type="submit">Request Early Access</button>
+            <button class="button button-primary" type="submit" data-i18n="waitButton">Request Early Access</button>
           </form>
         </div>
       </section>
@@ -351,14 +359,14 @@
     <footer class="site-footer">
       <div class="wrap footer-inner">
         <div>
-          <strong>BIMfabrik Copilot</strong>
-          <p>Real estate lifecycle data management for calm operations and sharper portfolio decisions.</p>
+          <strong>RealEstateSignal</strong>
+          <p data-i18n="footerText">Real estate lifecycle data management for calm operations and sharper portfolio decisions.</p>
         </div>
         <div class="footer-links">
-          <a href="#platform">Platform</a>
-          <a href="#lifecycle">Lifecycle</a>
-          <a href="#dashboards">Dashboards</a>
-          <a href="#waitlist">Waitlist</a>
+          <a href="#platform" data-i18n="navPlatform">Platform</a>
+          <a href="#lifecycle" data-i18n="navLifecycle">Lifecycle</a>
+          <a href="#showcases" data-i18n="navShowcases">Showcases</a>
+          <a href="#waitlist" data-i18n="navWaitlist">Waitlist</a>
         </div>
       </div>
     </footer>
