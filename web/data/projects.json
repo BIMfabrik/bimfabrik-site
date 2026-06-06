@@ -1,0 +1,6 @@
+[
+  { "name": "Genossenschaftsradar", "description": "Tracks co-op projects", "url": "/projects/genossenschaftsradar/" },
+  { "name": "Famili", "description": "Family app", "url": "/projects/famili/" },
+  { "name": "Xtraktor", "description": "PDF extractor tool", "url": "/projects/xtraktor/" },
+  { "name": "BIM Copilot", "description": "BIM assistant tool", "url": "/projects/bim-copilot/" }
+]

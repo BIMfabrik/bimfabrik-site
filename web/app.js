@@ -1,0 +1,1 @@
+console.log("BIMfabrik site initialized.");
