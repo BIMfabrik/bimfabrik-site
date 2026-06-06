@@ -1,0 +1,510 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BIMfabrik Copilot — Facility & Portfolio Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#070913;
+      --bg2:#06080f;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+      --muted2:rgba(255,255,255,.52);
+      --accent1:#5f7cff;
+      --accent2:#00eaff;
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --headerbg: rgba(7,9,19,.55);
+      --particle: rgba(0,234,255,0.55);
+      --linkline: rgba(95,124,255,.12);
+    }
+    [data-theme="light"]{
+      --bg:#f6f7fb;
+      --bg2:#eef1f8;
+      --card:rgba(255,255,255,.78);
+      --border:rgba(10,15,25,.12);
+      --text:rgba(10,15,25,.92);
+      --muted:rgba(10,15,25,.68);
+      --muted2:rgba(10,15,25,.52);
+      --shadow: 0 18px 60px rgba(0,0,0,.14);
+      --headerbg: rgba(246,247,251,.72);
+      --particle: rgba(0,160,190,0.30);
+      --linkline: rgba(95,124,255,.18);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto}
+    body{
+      background:
+        radial-gradient(1200px 700px at 10% -10%, rgba(95,124,255,.22), transparent 60%),
+        radial-gradient(900px 600px at 95% 0%, rgba(0,234,255,.14), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      overflow-x:hidden;
+    }
+    canvas{position:fixed;inset:0;z-index:-2}
+    .grain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.08;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="260" height="260"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="260" height="260" filter="url(%23n)" opacity="0.6"/></svg>');
+      background-size:260px 260px;
+      mix-blend-mode: overlay;
+    }
+    [data-theme="light"] .grain{opacity:.06; mix-blend-mode: multiply;}
+
+    header{
+      position:sticky;top:0;z-index:10;
+      backdrop-filter:blur(14px);
+      background:var(--headerbg);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    [data-theme="light"] header{border-bottom:1px solid rgba(10,15,25,.08);}
+
+    .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+
+    /* Header layout (less crowded, CTA always below) */
+    .topbar{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 0;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .mark{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--accent1),var(--accent2));
+      box-shadow:0 10px 30px rgba(0,234,255,.18);}
+    .logo{font-weight:700;letter-spacing:.5px}
+    .tag{font-size:12px;color:var(--muted2);margin-top:2px}
+
+    .navrow{
+      display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+      padding:6px 0 18px;
+    }
+
+    .btn{
+      padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.06);backdrop-filter:blur(12px);
+      color:var(--text);cursor:pointer;text-decoration:none;font-weight:600;font-size:13px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      display:inline-flex;align-items:center;gap:8px;
+    }
+    [data-theme="light"] .btn{
+      background:rgba(255,255,255,.65);
+      border:1px solid rgba(10,15,25,.12);
+    }
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{border:none;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061018}
+    .btn.icon{padding:10px 12px}
+
+    .ctaRow{
+      display:flex;justify-content:center;
+      padding:0 0 18px;
+    }
+    .ctaRow .btn.primary{
+      padding:12px 18px;
+      border-radius:16px;
+      box-shadow: 0 18px 40px rgba(0,234,255,.10);
+      white-space:nowrap;
+    }
+
+    /* Hero */
+    .hero{padding:74px 0 30px}
+    .kicker{display:inline-flex;gap:10px;align-items:center;padding:10px 14px;border-radius:999px;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(12px);color:var(--muted);font-size:13px}
+    [data-theme="light"] .kicker{background:rgba(255,255,255,.70);border:1px solid rgba(10,15,25,.12);}
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);box-shadow:0 0 20px rgba(0,234,255,.6)}
+    h1{margin-top:18px;font-size:58px;line-height:1.04;letter-spacing:-1px}
+    .grad{background:linear-gradient(90deg,var(--accent1),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .sub{margin-top:18px;max-width:860px;color:var(--muted);font-size:18px;line-height:1.6}
+
+    .heroGrid{margin-top:28px;display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:stretch}
+    .panel{border-radius:26px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(14px);box-shadow:var(--shadow)}
+    .panel.pad{padding:22px}
+
+    .form{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    input{width:240px;max-width:92vw;padding:14px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.07);backdrop-filter:blur(12px);color:var(--text);outline:none}
+    [data-theme="light"] input{background:rgba(255,255,255,.78);border:1px solid rgba(10,15,25,.14);}
+    input::placeholder{color:rgba(255,255,255,.55)}
+    [data-theme="light"] input::placeholder{color:rgba(10,15,25,.45)}
+    .note{margin-top:10px;font-size:12px;color:var(--muted2)}
+
+    .bullets{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+    .pill{font-size:12px;padding:8px 10px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);color:var(--muted)}
+    [data-theme="light"] .pill{background:rgba(255,255,255,.72);border:1px solid rgba(10,15,25,.12);}
+
+    /* Diagram */
+    .diagramWrap{padding:18px 18px 8px}
+    .diagramTitle{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:13px}
+    .diagramTitle b{color:var(--text)}
+    svg.diagram{width:100%;height:auto;margin-top:12px}
+    .dlabel{font-size:12px;fill:var(--text)}
+    .dmuted{font-size:11.5px;fill:var(--muted)}
+
+    /* Sections */
+    .section{padding:70px 0}
+    h2{font-size:30px;letter-spacing:-.4px}
+    .lead{margin-top:10px;color:var(--muted);max-width:900px;line-height:1.7}
+    .cards{margin-top:26px;display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+    .card{grid-column:span 4;padding:22px;border-radius:24px;background:var(--card);border:1px solid var(--border);backdrop-filter:blur(14px)}
+    .card.big{grid-column:span 6}
+    .icon{width:38px;height:38px;border-radius:16px;display:grid;place-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.10)}
+    [data-theme="light"] .icon{background:rgba(255,255,255,.72);border:1px solid rgba(10,15,25,.12);}
+    .card h3{font-size:15px;margin-top:10px}
+    .card p{margin-top:8px;color:var(--muted);font-size:13.5px;line-height:1.65}
+
+    .split{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .list{margin-top:12px;display:grid;gap:12px}
+    .li{display:flex;gap:12px;align-items:flex-start;padding:16px;border-radius:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)}
+    [data-theme="light"] .li{background:rgba(255,255,255,.70);border:1px solid rgba(10,15,25,.12);}
+    .li b{display:block;font-size:13px}
+    .li span{display:block;color:var(--muted);font-size:12.8px;margin-top:5px;line-height:1.55}
+    .check{width:18px;height:18px;border-radius:8px;background:linear-gradient(135deg,var(--accent1),var(--accent2));margin-top:2px}
+
+    footer{padding:48px 0 70px;color:var(--muted2);font-size:13px}
+    .mini{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .mini a{color:var(--muted);text-decoration:none}
+    .mini a:hover{color:var(--text)}
+
+    @media (max-width: 980px){
+      h1{font-size:44px}
+      .heroGrid{grid-template-columns:1fr}
+      .card{grid-column:span 12}
+      .card.big{grid-column:span 12}
+      .split{grid-template-columns:1fr}
+      .topbar{padding:14px 0}
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div class="grain"></div>
+
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <div class="brand">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <div class="logo">BIMfabrik <span style="opacity:.7">Copilot</span></div>
+            <div class="tag">Information management • Facility data • Portfolio dashboards • Agents</div>
+          </div>
+        </div>
+
+        <button class="btn icon" id="themeToggle" type="button" aria-label="Toggle dark/light">
+          <span aria-hidden="true" id="themeIcon">🌙</span>
+          <span id="themeLabel">Dark</span>
+        </button>
+      </div>
+
+      <div class="navrow">
+        <a class="btn" href="#features">✨ Features</a>
+        <a class="btn" href="#diagram">🧩 Diagram</a>
+        <a class="btn" href="#usecases">🗂️ Use cases</a>
+        <a class="btn" href="#waitlist">📨 Waitlist</a>
+      </div>
+
+      <div class="ctaRow">
+        <a class="btn primary" href="#waitlist">Request early access</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" id="top">
+      <div class="kicker"><span class="dot"></span> Copilot for <b>information management</b>, <b>facility data</b> and <b>portfolio performance</b></div>
+      <h1>Turn facility complexity into <span class="grad">clarity</span> — with agents that run the process.</h1>
+      <p class="sub">
+        BIMfabrik Copilot unifies documents, asset registers, compliance records and workstreams into one operating layer:
+        searchable knowledge, live dashboards, task automation, and AI agents for repeatable workflows.
+      </p>
+
+      <div class="heroGrid">
+        <div class="panel pad" id="waitlist">
+          <h2 style="font-size:18px">Get launch updates</h2>
+          <p class="lead" style="margin-top:10px;font-size:14px;max-width:none">
+            Join the waitlist to receive product news, early demos, and pilot invitations.
+          </p>
+
+          <form class="form" action="https://formspree.io/f/xzdanybz" method="POST">
+            <input name="name" type="text" placeholder="Name" required />
+            <input name="email" type="email" placeholder="Work email" required />
+            <input type="hidden" name="product" value="BIMfabrik Copilot waitlist" />
+            <input type="hidden" name="_redirect" value="/thanks.html" />
+            <button class="btn primary" type="submit" style="padding:14px 18px;border-radius:16px">Join waitlist</button>
+          </form>
+
+          <div class="bullets">
+            <div class="pill">🧠 Knowledge</div>
+            <div class="pill">🏢 Facility data</div>
+            <div class="pill">📊 Dashboards</div>
+            <div class="pill">🤖 Agents</div>
+            <div class="pill">✅ Tasks</div>
+          </div>
+
+          <div class="note">No spam — only product updates. You can unsubscribe anytime.</div>
+        </div>
+
+        <div class="panel" id="diagram">
+          <div class="diagramWrap">
+            <div class="diagramTitle">How it works: <b>sources → model → dashboards/agents → actions</b></div>
+
+            <svg class="diagram" viewBox="0 0 720 360" role="img" aria-label="BIMfabrik Copilot flow diagram">
+              <defs>
+                <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="var(--accent1)"/>
+                  <stop offset="1" stop-color="var(--accent2)"/>
+                </linearGradient>
+                <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="8" result="b"/>
+                  <feMerge>
+                    <feMergeNode in="b"/>
+                    <feMergeNode in="SourceGraphic"/>
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <!-- connectors -->
+              <path d="M190 95 C 250 95, 250 95, 310 95" stroke="var(--linkline)" stroke-width="2" fill="none"/>
+              <path d="M190 180 C 250 180, 250 180, 310 180" stroke="var(--linkline)" stroke-width="2" fill="none"/>
+              <path d="M190 265 C 250 265, 250 265, 310 265" stroke="var(--linkline)" stroke-width="2" fill="none"/>
+
+              <path d="M410 140 C 460 140, 460 115, 520 115" stroke="var(--linkline)" stroke-width="2" fill="none"/>
+              <path d="M410 220 C 460 220, 460 245, 520 245" stroke="var(--linkline)" stroke-width="2" fill="none"/>
+              <path d="M610 115 C 650 115, 650 180, 610 245" stroke="var(--linkline)" stroke-width="1.5" fill="none" opacity=".6"/>
+
+              <!-- left: sources -->
+              <g>
+                <rect x="40" y="60" rx="18" ry="18" width="150" height="70" fill="var(--card)" stroke="var(--border)"/>
+                <text x="62" y="92" class="dlabel">📄 Documents</text>
+                <text x="62" y="114" class="dmuted">SOPs, permits, reports</text>
+
+                <rect x="40" y="145" rx="18" ry="18" width="150" height="70" fill="var(--card)" stroke="var(--border)"/>
+                <text x="62" y="177" class="dlabel">🏗️ BIM / CAD</text>
+                <text x="62" y="199" class="dmuted">Drawings, models, tags</text>
+
+                <rect x="40" y="230" rx="18" ry="18" width="150" height="70" fill="var(--card)" stroke="var(--border)"/>
+                <text x="62" y="262" class="dlabel">🧰 CMMS / IWMS</text>
+                <text x="62" y="284" class="dmuted">Assets, work orders, cost</text>
+              </g>
+
+              <!-- center: data model -->
+              <g filter="url(#soft)">
+                <rect x="310" y="110" rx="22" ry="22" width="170" height="140" fill="url(#g)" opacity="0.95"/>
+                <text x="340" y="160" class="dlabel" fill="#07101a">Facility data model</text>
+                <text x="340" y="184" class="dmuted" fill="#07101a" opacity=".85">Sites • spaces • assets</text>
+                <text x="340" y="206" class="dmuted" fill="#07101a" opacity=".85">Systems • vendors • costs</text>
+              </g>
+
+              <!-- right: outputs -->
+              <g>
+                <rect x="520" y="75" rx="18" ry="18" width="160" height="80" fill="var(--card)" stroke="var(--border)"/>
+                <text x="542" y="110" class="dlabel">📊 Dashboards</text>
+                <text x="542" y="133" class="dmuted">KPIs, risk, spend, energy</text>
+
+                <rect x="520" y="205" rx="18" ry="18" width="160" height="80" fill="var(--card)" stroke="var(--border)"/>
+                <text x="542" y="240" class="dlabel">🤖 Agents</text>
+                <text x="542" y="263" class="dmuted">Checks, reports, follow-ups</text>
+
+                <rect x="520" y="300" rx="18" ry="18" width="160" height="50" fill="var(--card)" stroke="var(--border)"/>
+                <text x="542" y="332" class="dlabel">✅ Tasks & approvals</text>
+              </g>
+            </svg>
+
+            <div class="note" style="margin-top:10px">Diagram is illustrative — integrations and modules evolve with pilots.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>Less tools. More execution.</h2>
+      <p class="lead">A clean operating layer that connects knowledge, portfolio visibility, and action—without turning into another crowded platform.</p>
+
+      <div class="cards">
+        <div class="card">
+          <div class="icon">🧾</div>
+          <h3>Searchable knowledge</h3>
+          <p>Ask questions across manuals, contracts, certificates, SOPs, drawings and reports—then link answers to assets and sites.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🏢</div>
+          <h3>Facility data structure</h3>
+          <p>Normalize sites, spaces, assets and systems so your reporting stays consistent even when sources change.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Portfolio dashboards</h3>
+          <p>Backlog, compliance, spend, utilization, risk and energy—with drill-down and weekly summaries.</p>
+        </div>
+
+        <div class="card big">
+          <div class="icon">🤖</div>
+          <h3>Agents for repeatable processes</h3>
+          <p>Compliance checks, monthly reporting, vendor follow-ups, exceptions—automated with approvals and an audit trail.</p>
+        </div>
+
+        <div class="card big">
+          <div class="icon">✅</div>
+          <h3>Tasks that come from insights</h3>
+          <p>Turn dashboard signals into assigned actions with due dates, owners and status—no copy/paste into yet another system.</p>
+        </div>
+
+        <div class="card">
+          <div class="icon">🔌</div>
+          <h3>Integrations later</h3>
+          <p>Start with files + spreadsheets. Add CMMS/IWMS and email integrations when you’re ready.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="usecases">
+      <h2>Use cases</h2>
+      <p class="lead">Designed for facility teams, portfolio managers, and leadership who need a clear view—and a reliable way to act.</p>
+
+      <div class="split">
+        <div class="panel pad">
+          <h3 style="font-size:16px">Facility & operations</h3>
+          <div class="list">
+            <div class="li"><div class="check"></div><div><b>Compliance command center</b><span>Know what’s due, what’s missing, and where evidence lives—across all sites.</span></div></div>
+            <div class="li"><div class="check"></div><div><b>Work order intelligence</b><span>Find repeat failures and auto-create weekly actions with owners and due dates.</span></div></div>
+            <div class="li"><div class="check"></div><div><b>Vendor visibility</b><span>Track SLAs, renewals and cost drivers with structured notes and reminders.</span></div></div>
+          </div>
+        </div>
+
+        <div class="panel pad">
+          <h3 style="font-size:16px">Portfolio & leadership</h3>
+          <div class="list">
+            <div class="li"><div class="check"></div><div><b>Portfolio performance</b><span>See spend, backlog, energy and risk by region, site, or asset type.</span></div></div>
+            <div class="li"><div class="check"></div><div><b>Decision-ready reporting</b><span>Generate monthly packs with clear drivers and recommended actions.</span></div></div>
+            <div class="li"><div class="check"></div><div><b>Continuous improvement</b><span>Measure outcomes, keep the history, and repeat what works.</span></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel pad" style="margin-top:16px">
+        <h3 style="font-size:16px">Pricing & payments</h3>
+        <p class="lead" style="margin-top:10px;max-width:none;font-size:14px">
+          Stripe integration later for self-serve plans. For now, we’re onboarding design partners and pilots.
+        </p>
+        <div class="bullets">
+          <div class="pill">Design partner program</div>
+          <div class="pill">Pilot deployments</div>
+          <div class="pill">Security-first roadmap</div>
+          <div class="pill">EU-friendly hosting options</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+        <div>© 2026 BIMfabrik Copilot</div>
+        <div class="mini">
+          <a href="#top">Top</a> ·
+          <a href="#features">Features</a> ·
+          <a href="#diagram">Diagram</a> ·
+          <a href="#usecases">Use cases</a> ·
+          <a href="#waitlist">Waitlist</a>
+        </div>
+      </div>
+      <div style="margin-top:10px">Built for calm operations: fewer dashboards, clearer actions.</div>
+    </footer>
+  </main>
+
+  <script>
+    // Theme: persist in localStorage, default to system preference
+    const root = document.documentElement;
+    const btn = document.getElementById("themeToggle");
+    const icon = document.getElementById("themeIcon");
+    const label = document.getElementById("themeLabel");
+
+    function systemPrefersLight(){
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+    }
+
+    function applyTheme(theme) {
+      root.setAttribute("data-theme", theme);
+      const isLight = theme === "light";
+      icon.textContent = isLight ? "☀️" : "🌙";
+      label.textContent = isLight ? "Light" : "Dark";
+    }
+
+    const saved = localStorage.getItem("theme");
+    const initial = saved ? saved : (systemPrefersLight() ? "light" : "dark");
+    applyTheme(initial);
+
+    btn.addEventListener("click", () => {
+      const current = root.getAttribute("data-theme") || "dark";
+      const next = current === "dark" ? "light" : "dark";
+      localStorage.setItem("theme", next);
+      applyTheme(next);
+    });
+
+    // Particle network background (theme-aware)
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+
+    function resize(){
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const N = 95;
+    const pts = Array.from({length:N}, () => ({ 
+      x: Math.random()*canvas.width,
+      y: Math.random()*canvas.height,
+      vx: (Math.random()-.5)*0.22,
+      vy: (Math.random()-.5)*0.22,
+      r: Math.random()*1.8 + 0.4
+    }));
+
+    function step(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+
+      const particleColor = getComputedStyle(root).getPropertyValue('--particle').trim() || "rgba(0,234,255,0.55)";
+      const linkColor = getComputedStyle(root).getPropertyValue('--linkline').trim() || "rgba(95,124,255,.12)";
+
+      for (let i=0;i<N;i++) {
+        const p = pts[i];
+        p.x += p.vx; p.y += p.vy;
+        if (p.x< -20) p.x = canvas.width+20;
+        if (p.x> canvas.width+20) p.x = -20;
+        if (p.y< -20) p.y = canvas.height+20;
+        if (p.y> canvas.height+20) p.y = -20;
+
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = particleColor;
+        ctx.fill();
+      }
+
+      for (let i=0;i<N;i++) {
+        for (let j=i+1;j<N;j++) {
+          const a=pts[i], b=pts[j];
+          const dx=a.x-b.x, dy=a.y-b.y;
+          const d2=dx*dx+dy*dy;
+          if (d2 < 150*150) {
+            const alpha = 1 - (Math.sqrt(d2)/150);
+            ctx.save();
+            ctx.globalAlpha = alpha * 0.85;
+            ctx.strokeStyle = linkColor;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+
+      requestAnimationFrame(step);
+    }
+    step();
+  </script>
+</body>
+</html>
