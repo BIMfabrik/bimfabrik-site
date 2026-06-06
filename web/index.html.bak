@@ -327,47 +327,6 @@
         </div>
       </section>
 
-      <section class="platform-section" id="social">
-        <div class="wrap">
-          <div class="section-heading" style="text-align:center;max-width:900px;margin:0 auto">
-            <span data-i18n="socialLabel">Trusted by</span>
-            <h2 data-i18n="socialTitle">Design partners shaping the platform.</h2>
-            <p data-i18n="socialText">RealEstateSignal is being built with facility and portfolio teams who need clearer lifecycle data. Their input drives every layer of the product.</p>
-          </div>
-
-          <div class="testimonial-grid">
-            <article class="testimonial-card">
-              <div class="testimonial-avatar"><span>PK</span></div>
-              <div>
-                <p data-i18n="testimonial1Text">"We needed a single view across acquisitions, compliance, and operations. RealEstateSignal showed us what connected data actually looks like in practice."</p>
-                <strong data-i18n="testimonial1Name">Portfolio lead, Swiss asset manager</strong>
-              </div>
-            </article>
-            <article class="testimonial-card">
-              <div class="testimonial-avatar"><span>FD</span></div>
-              <div>
-                <p data-i18n="testimonial2Text">"The clarity on data confidence alone changed how we prioritize remediation work across our sites. No more guessing which records are reliable."</p>
-                <strong data-i18n="testimonial2Name">Facility director, European real estate firm</strong>
-              </div>
-            </article>
-            <article class="testimonial-card">
-              <div class="testimonial-avatar"><span>DP</span></div>
-              <div>
-                <p data-i18n="testimonial3Text">"We joined as a design partner to help shape the product. Six months in, it's already reducing the time we spend chasing handover documentation."</p>
-                <strong data-i18n="testimonial3Name">Development partner, Zurich-based portfolio</strong>
-              </div>
-            </article>
-          </div>
-
-          <div class="logo-strip" aria-label="Design partner organizations">
-            <span class="logo-placeholder" data-i18n="logo1">BXS Partners</span>
-            <span class="logo-placeholder" data-i18n="logo2">Campus Operations AG</span>
-            <span class="logo-placeholder" data-i18n="logo3">ProReal Estate</span>
-            <span class="logo-placeholder" data-i18n="logo4">Urban Development Partners</span>
-          </div>
-        </div>
-      </section>
-
       <section class="waitlist-section" id="waitlist">
         <div class="wrap waitlist-shell">
           <div class="waitlist-copy">
