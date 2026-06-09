@@ -437,6 +437,27 @@ h1 {
   background: var(--accent-strong);
 }
 
+.flow-dot-file {
+  background: #3b82f6;
+}
+
+.flow-dot-bim {
+  background: #8b5cf6;
+}
+
+.flow-dot-cmms {
+  background: #06b6d4;
+}
+
+.flow-dot-legal {
+  background: #10b981;
+}
+
+[data-theme="dark"] .flow-dot-file { background: #60a5fa; }
+[data-theme="dark"] .flow-dot-bim { background: #a78bfa; }
+[data-theme="dark"] .flow-dot-cmms { background: #22d3ee; }
+[data-theme="dark"] .flow-dot-legal { background: #34d399; }
+
 .flow-dot-green {
   background: var(--accent-warm);
 }
@@ -962,20 +983,23 @@ h1 {
 
 .lifecycle-panel {
   display: grid;
-  gap: 14px;
-  padding: 22px;
+  gap: 16px;
+  padding: 24px;
   border-radius: var(--radius-xl);
 }
 
 .lifecycle-step {
-  padding: 16px 18px;
+  padding: 16px 18px 16px 22px;
   border-radius: var(--radius-lg);
   background: rgba(0, 0, 0, 0.02);
   border: 1px solid var(--panel-border);
+  border-left: 3px solid var(--accent-strong);
+  position: relative;
 }
 
 [data-theme="dark"] .lifecycle-step {
   background: rgba(255, 255, 255, 0.02);
+  border-left-color: var(--accent);
 }
 
 .lifecycle-step strong {
