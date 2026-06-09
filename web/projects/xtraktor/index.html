@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Xtraktor - Document and Data Extraction</title>
-  <meta
-    name="description"
-    content="Xtraktor extracts structured signals from PDFs, handover files, and operational documentation to feed better real estate data workflows."
-  />
+  <title data-i18n="title">Xtraktor – BIMfabrik</title>
+  <meta name="description" content="Xtraktor extracts structured signals from PDFs, handover files, and operational documentation to feed better real estate data workflows." />
+  <link rel="canonical" href="https://www.bimfabrik.ch/projects/xtraktor/" />
+  <meta property="og:title" content="Xtraktor – BIMfabrik" />
+  <meta property="og:description" content="A document extraction layer built for PDFs, schedules, handover packages, and semi-structured operational records." />
+  <meta property="og:url" content="https://www.bimfabrik.ch/projects/xtraktor/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Xtraktor – BIMfabrik" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
+<body data-page="xtraktor">
   <div class="site-shell">
     <div class="ambient ambient-a" aria-hidden="true"></div>
     <div class="ambient ambient-b" aria-hidden="true"></div>
@@ -24,19 +25,31 @@
 
     <header class="topbar">
       <div class="wrap topbar-inner">
-        <a class="brand" href="/" aria-label="BIMfabrik home">
+        <a class="brand" href="/" aria-label="BIMfabrik Startseite">
           <span class="brand-mark"></span>
           <span class="brand-copy">
             <strong>BIMfabrik</strong>
-            <span>BIM, Digital Twin & Lifecycle-Daten</span>
+            <span data-i18n="brandTag">BIM, Digital Twin & Lifecycle-Daten</span>
           </span>
         </a>
+
+        <nav class="main-nav" aria-label="Navigation">
+          <a href="/#platform" data-i18n="navPlatform">Plattform</a>
+          <a href="/#lifecycle" data-i18n="navLifecycle">Lebenszyklus</a>
+          <a href="/#leistungen" data-i18n="navLeistungen">Leistungen</a>
+          <a href="/#showcases" data-i18n="navShowcases">Showcases</a>
+          <a href="/#kontakt" data-i18n="navKontakt">Kontakt</a>
+        </nav>
+
         <div class="topbar-actions">
-          <button class="button theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark mode">
+          <button class="button lang-toggle" type="button" data-lang-toggle aria-label="Zwischen Deutsch und Englisch umschalten">
+            <span data-lang-label>DE</span>
+          </button>
+          <button class="button theme-toggle" type="button" data-theme-toggle aria-label="Helles und dunkles Farbschema umschalten">
             <span class="theme-icon" data-theme-icon>◐</span>
             <span data-theme-label>Dark</span>
           </button>
-          <a class="button button-secondary" href="/">Back to Home</a>
+          <a class="button button-primary topbar-cta" href="/#kontakt" data-i18n="ctaRequest">Kontakt aufnehmen</a>
         </div>
       </div>
     </header>
@@ -137,10 +150,28 @@
             </article>
           </div>
 
-          <a class="button button-secondary section-backlink" href="/">Back to homepage</a>
+          <a class="button button-secondary section-backlink" href="/">Zurück zur Startseite</a>
         </div>
       </section>
     </main>
+
+    <footer class="site-footer">
+      <div class="wrap footer-inner">
+        <div>
+          <strong>BIMfabrik</strong>
+          <p data-i18n="footerText">Lebenszyklus-Datenmanagement für Immobilien – für ruhigere Abläufe und schärfere Portfolio-Entscheidungen.</p>
+        </div>
+        <div class="footer-links">
+          <a href="/#platform" data-i18n="navPlatform">Plattform</a>
+          <a href="/#lifecycle" data-i18n="navLifecycle">Lebenszyklus</a>
+          <a href="/#leistungen" data-i18n="navLeistungen">Leistungen</a>
+          <a href="/#showcases" data-i18n="navShowcases">Showcases</a>
+          <a href="/#kontakt" data-i18n="navKontakt">Kontakt</a>
+          <a href="/impressum" data-i18n="navImpressum">Impressum</a>
+        </div>
+      </div>
+    </footer>
   </div>
+  <script src="/app.js"></script>
 </body>
 </html>

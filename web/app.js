@@ -159,6 +159,18 @@ document.addEventListener("DOMContentLoaded", () => {
     proofgrid: {
       title: { en: "ProofGrid — BIMfabrik", de: "ProofGrid — BIMfabrik" },
     },
+    bimCopilot: {
+      title: { en: "BIM Copilot — BIMfabrik", de: "BIM Copilot — BIMfabrik" },
+    },
+    famili: {
+      title: { en: "Famili — BIMfabrik", de: "Famili — BIMfabrik" },
+    },
+    genossenschaftsradar: {
+      title: { en: "Genossenschaftsradar — BIMfabrik", de: "Genossenschaftsradar — BIMfabrik" },
+    },
+    xtraktor: {
+      title: { en: "Xtraktor — BIMfabrik", de: "Xtraktor — BIMfabrik" },
+    },
     thanks: {
       title: { en: "Thanks — BIMfabrik", de: "Danke — BIMfabrik" },
     },
