@@ -1385,3 +1385,91 @@ h1 {
     gap: 18px;
   }
 }
+
+
+/* Visual fixes: mobile header, compact CTAs, and overflow hardening */
+html,
+body {
+  overflow-x: clip;
+}
+
+.brand {
+  min-width: 0;
+}
+
+.brand-copy {
+  min-width: 0;
+}
+
+.brand-copy strong,
+.brand-copy span {
+  white-space: nowrap;
+}
+
+.topbar-actions .button {
+  width: auto;
+  white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+  .topbar-inner {
+    gap: 10px;
+  }
+
+  .brand {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .brand-copy span {
+    display: none;
+  }
+
+  .brand-copy strong {
+    max-width: 34vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .topbar-actions {
+    gap: 8px;
+  }
+
+  .lang-toggle,
+  .theme-toggle {
+    min-height: 38px;
+    min-width: 42px;
+    width: auto;
+    padding: 0 11px;
+  }
+
+  .theme-toggle [data-theme-label],
+  .topbar-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-top: 36px;
+  }
+
+  .hero-text {
+    font-size: 1rem;
+  }
+
+  .button {
+    min-height: 46px;
+  }
+
+  .showcase-head,
+  .dashboard-head {
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .status-pill {
+    white-space: normal;
+    text-align: center;
+  }
+}
