@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <title>UWI26 Strategieübersicht – BIMfabrik</title>
+  <meta name="description" content="Strategische Übersicht zur Erneuerung Untere Winterthurerstrasse, mit Analyse, Variantenlogik, Risiken und Dokumentreferenzen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f2ea;
+      --panel: #ffffff;
+      --panel-2: #f0eadf;
+      --text: #1d2520;
+      --muted: #657066;
+      --line: #ddd3c3;
+      --accent: #587b4b;
+      --accent-2: #d8e1cf;
+      --warn: #a06a24;
+      --bad: #9c3c2f;
+      --good: #587b4b;
+      --shadow: 0 12px 34px rgba(69, 54, 36, 0.10);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    .gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+    }
+
+    .gate-card {
+      width: min(520px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    .gate-card h1,
+    .hero h1,
+    h2,
+    h3 {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      line-height: 1.08;
+      margin: 0;
+      letter-spacing: -0.04em;
+    }
+
+    .gate-card h1 { font-size: clamp(2rem, 6vw, 3.2rem); }
+    .gate-card p { color: var(--muted); }
+
+    .password-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: #ffffff;
+      color: var(--text);
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--accent); }
+
+    button,
+    .button {
+      border: 1px solid var(--accent);
+      border-radius: 999px;
+      padding: 14px 18px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .error {
+      min-height: 24px;
+      color: var(--bad);
+      font-size: 0.92rem;
+      margin: 12px 0 0;
+    }
+
+    .site { display: none; }
+    body.unlocked .gate { display: none; }
+    body.unlocked .site { display: block; }
+
+    .wrap {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 242, 234, 0.96);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 74px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 9px 11px;
+      border-radius: 999px;
+    }
+
+    .nav a:hover { color: var(--text); background: var(--panel-2); }
+
+    .hero {
+      padding: 74px 0 36px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.14fr) minmax(320px, 0.86fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .eyebrow,
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 12px;
+      color: var(--muted);
+      background: var(--panel);
+      font-size: 0.88rem;
+      font-weight: 800;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7.2rem);
+      margin-top: 22px;
+      max-width: 960px;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      max-width: 780px;
+      margin: 22px 0 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .summary-card,
+    .panel,
+    details,
+    .source-card,
+    .metric-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .summary-card {
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .summary-card strong {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .risk-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .risk-list li {
+      display: flex;
+      gap: 10px;
+      color: var(--muted);
+    }
+
+    .risk-list li::before {
+      content: "";
+      flex: 0 0 8px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      margin-top: 9px;
+      background: var(--warn);
+    }
+
+    section { padding: 38px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 4vw, 4rem);
+      max-width: 760px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 430px;
+      margin: 0;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .metric-card { padding: 20px; }
+    .metric-card span { color: var(--muted); font-size: 0.9rem; font-weight: 800; }
+    .metric-card strong { display: block; margin-top: 8px; font-size: 2rem; font-family: "Plus Jakarta Sans", system-ui, sans-serif; }
+    .metric-card p { color: var(--muted); margin-bottom: 0; }
+
+    .panel { padding: 24px; }
+    .panel h3 { font-size: 1.55rem; margin-bottom: 12px; }
+    .panel p,
+    .panel li { color: var(--muted); }
+
+    details {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    details + details { margin-top: 12px; }
+
+    summary {
+      cursor: pointer;
+      padding: 20px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      font-weight: 900;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::after {
+      content: "+";
+      color: var(--accent);
+      font-size: 1.4rem;
+    }
+    details[open] summary::after { content: "–"; }
+
+    .detail-body {
+      padding: 0 22px 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .detail-body p,
+    .detail-body li,
+    .detail-body td { color: var(--muted); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      margin-top: 14px;
+    }
+
+    th,
+    td {
+      padding: 13px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th {
+      color: var(--text);
+      background: var(--panel-2);
+      font-size: 0.88rem;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .badge {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .badge.bad { color: var(--bad); border-color: rgba(255,156,156,0.28); }
+    .badge.warn { color: var(--warn); border-color: rgba(255,211,122,0.28); }
+    .badge.good { color: var(--good); border-color: rgba(157,255,191,0.28); }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .source-card {
+      padding: 18px;
+    }
+
+    .source-card strong {
+      display: block;
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .source-card p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 0.94rem;
+    }
+
+    .sources-toggle { margin-top: 18px; }
+    .sources-toggle summary { font-size: 1.1rem; }
+
+    .callout {
+      border: 1px solid #e2c98e;
+      background: #fff7e4;
+      border-radius: 22px;
+      padding: 18px;
+      color: #5d4a1e;
+    }
+
+    .footer {
+      padding: 36px 0 60px;
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      margin-top: 42px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .grid-3,
+      .grid-2,
+      .source-grid { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+      .nav { display: none; }
+    }
+
+    @media (max-width: 560px) {
+      .password-row { flex-direction: column; }
+      .topbar-inner { min-height: 64px; }
+      .hero { padding-top: 46px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="gate" aria-label="Password gate">
+    <form class="gate-card" id="gateForm">
+      <span class="eyebrow"><span class="dot"></span> Geschützte Arbeitsseite</span>
+      <h1>UWI26 Strategieübersicht</h1>
+      <p>Diese Seite ist eine kompakte Arbeitsübersicht zur Erneuerung Untere Winterthurerstrasse. Der Schutz ist bewusst einfach und client-seitig.</p>
+      <div class="password-row">
+        <input id="password" type="password" autocomplete="current-password" placeholder="Passwort" aria-label="Passwort" />
+        <button type="submit">Öffnen</button>
+      </div>
+      <p class="error" id="error" aria-live="polite"></p>
+    </form>
+  </div>
+
+  <div class="site">
+    <header class="topbar">
+      <div class="wrap topbar-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>BIMfabrik · UWI26</span>
+        </a>
+        <nav class="nav" aria-label="Navigation">
+          <a href="#befund">Befund</a>
+          <a href="#strategie">Strategie</a>
+          <a href="#kosten">Kosten</a>
+          <a href="#varianten">Varianten</a>
+          <a href="#dokumente">Dokumente</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow"><span class="dot"></span> Arbeitsstand · Untere Winterthurerstrasse</span>
+            <h1>Strategie vor Projekt.</h1>
+            <p class="lead">Die alten Wettbewerbspläne sind als Referenz wertvoll, aber sie sind keine robuste Bauprojekt-Basis mehr. UWI26 muss zuerst die neue Bestellung, Variantenlogik und Entscheidungsgrundlage klären.</p>
+            <div class="hero-actions">
+              <a class="button" href="#strategie">Strategische Prioritäten</a>
+              <a class="button" href="#dokumente">Dokumentreferenzen</a>
+            </div>
+          </div>
+
+          <aside class="summary-card">
+            <span class="tag">Kernaussage</span>
+            <strong>Das 2017er Projekt beantwortet eine alte Wettbewerbsfrage. Die 2026er Frage ist breiter.</strong>
+            <ul class="risk-list">
+              <li>Bestandserhalt, Ersatzneubau und Etappierung sind neu offen zu prüfen.</li>
+              <li>Lärm, BZO (Bau- und Zonenordnung) der Stadt Zürich, Ortsbild, ISOS (Bundesinventar der schützenswerten Ortsbilder der Schweiz von nationaler Bedeutung), Netto-Null und graue Energie müssen neu bewertet werden.</li>
+              <li>Wohnungsmix und Altersgerechtigkeit müssen aus aktuellen BGO-Daten abgeleitet werden.</li>
+              <li>Gewerbe, Dachgemeinschaft und Tiefgarage brauchen belastbare Betriebs- und Kostenlogik.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="befund">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="tag">Befund</span>
+              <h2>Was am alten Projekt kritisch ist.</h2>
+            </div>
+            <p>Die Punkte sind als Prüf- und Entscheidungsagenda formuliert. Das alte Wettbewerbsprojekt bleibt eine Referenz, aber nicht die neue Bestellung.</p>
+          </div>
+
+          <div class="grid-3">
+            <article class="metric-card">
+              <span>Status</span>
+              <strong>2017 ≠ 2026</strong>
+              <p>Die Ausgangslage hat sich durch Recht, Nachhaltigkeit, Partizipation und BGO-Bedarf verändert.</p>
+            </article>
+            <article class="metric-card">
+              <span>Hauptunsicherheit</span>
+              <strong>Lärm + Bestand</strong>
+              <p>Beide Themen bestimmen, ob Ersatz, Teilersatz, Sanierung oder Etappierung sinnvoll ist.</p>
+            </article>
+            <article class="metric-card">
+              <span>Arbeitsauftrag</span>
+              <strong>Neue Bestellung</strong>
+              <p>Erst Briefing und Variantenmatrix, dann architektonische Vertiefung.</p>
+            </article>
+          </div>
+
+          <div style="margin-top:16px">
+            <details open>
+              <summary>1. Projektbasis ist veraltet</summary>
+              <div class="detail-body">
+                <p>Das Wettbewerbsprogramm von 2016 und die Überarbeitung von 2017 gehen von einem Ersatzneubau mit ca. 140 Wohnungen aus. In den Dokumenten ab 2025/2026 wird die Planung jedoch bewusst neu geöffnet: Machbarkeitsstudie, Mitwirkung, Umgang mit Bestand, Nachhaltigkeit und Vorgehenskonzept.</p>
+                <table>
+                  <thead><tr><th>Alte Annahme</th><th>Aktuelle Fragestellung 2026</th></tr></thead>
+                  <tbody>
+                    <tr><td>Ersatzneubau als Hauptlogik</td><td>Vergleich Ersatz, Teilersatz, Sanierung, Etappierung</td></tr>
+                    <tr><td>ca. 140 Wohnungen</td><td>Wohnungsspiegel aus realen BGO-Daten ableiten</td></tr>
+                    <tr><td>Lärmlogik gemäss damaliger Praxis</td><td>Neuprüfung nach USG (Umweltschutzgesetz), LSV (Lärmschutz-Verordnung), aktueller Vollzugspraxis und BZO (Bau- und Zonenordnung) der Stadt Zürich</td></tr>
+                    <tr><td>Parkierung nach alter Projektlogik</td><td>Mobilitätskonzept, Velo, Cargo, Besucher, reduzierte Garage prüfen</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+
+            <details>
+              <summary>2. Zu viel Wettbewerbsarchitektur, zu wenig robuste Genossenschaftslogik</summary>
+              <div class="detail-body">
+                <p>Das Projekt «Jim Knopf» ist städtebaulich stark: lange Baukörper als Lärmschild, terrassierte Hofseite, Erker, Dachgemeinschaft, Café, Gewerbe, Krippe und Tiefgarage. Genau diese Dichte an Ideen erzeugt aber Kosten-, Betriebs- und Umsetzungsrisiken.</p>
+                <ul>
+                  <li>Viele Sondertypen und Schnittlösungen erschweren Standardisierung.</li>
+                  <li>Dachterrasse, Bistro und Gewerbe erzeugen Betriebspflichten.</li>
+                  <li>Erker, Split-Level und spezielle Fassadenlogik können Baukosten und Unterhalt erhöhen.</li>
+                  <li>Die Strategie muss zuerst klären, welche Qualitäten zwingend sind und welche nur optional.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>3. Lärmlösung ist zentral, aber fragil</summary>
+              <div class="detail-body">
+                <p>Die Winterthurerstrasse ist stark lärmbelastet. Der alte Entwurf nutzt die Neubauten als Lärmschild und arbeitet mit durchwohnenden Wohnungen, Erkern, hofseitigen Zimmern, kontrollierter Lüftung und Gewerbe im Erdgeschoss.</p>
+                <p>Lärmschutz neu formulieren: wohnungsweise prüfen, ob die IGW (Immissionsgrenzwerte) nach LSV (Lärmschutz-Verordnung) an den massgebenden offenen Fenstern lärmempfindlicher Räume eingehalten werden. Wo dies nicht möglich ist, sind Grundrissdisposition, lärmabgewandte Lüftungsfenster, Loggien/Erker, Nutzungsverteilung, kontrollierte Lüftung und allfällige Ausnahmebewilligungen nach aktueller Vollzugspraxis transparent zu dokumentieren.</p>
+                <div class="callout">Prüfpunkt: In der 2017er Beschreibung werden bei 64% der 3/3.5-Zimmer-Wohnungen hofseitige Schlafzimmer genannt. Das ist ein Warnsignal: Der Rest hängt stärker an Sonderlösungen.</div>
+              </div>
+            </details>
+
+            <details>
+              <summary>4. Altersgerechtigkeit und Hindernisfreiheit müssen härter bestellt werden</summary>
+              <div class="detail-body">
+                <p>Die alte Programmlogik fordert hindernisfreie und altersgerechte Wohnungen. Die 2017er Typologien enthalten aber Duplex, Split-Level und nur teilweise explizit SIA-500-konforme (Hindernisfreie Bauten) oder anpassbare Einheiten.</p>
+                <ul>
+                  <li>Zielvorgabe: möglichst 100% der Wohnungen schwellenlos erreichbar.</li>
+                  <li>2.5- und 3.5-Zimmer-Wohnungen als echte Alters- und Wechselwohnungen definieren.</li>
+                  <li>Rollator, Kinderwagen, Lift, Keller, Waschen, Briefkasten und Gartenwege als Nutzungskette prüfen.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details>
+              <summary>5. Wohnungsmix muss aus realen BGO-Daten neu berechnet werden</summary>
+              <div class="detail-body">
+                <p>Das alte Programm sieht bei 140 Wohnungen ungefähr 21% 2–2.5 Zi, 56% 3–3.5 Zi, 18% 4–4.5 Zi, 4% 5–5.5 Zi und 1% 6–6.5 Zi vor. Das muss mit der heutigen BGO-Struktur abgeglichen werden.</p>
+                <table>
+                  <thead><tr><th>Typ</th><th>Altes Programm</th><th>Neue Prüfung</th></tr></thead>
+                  <tbody>
+                    <tr><td>2–2.5 Zi</td><td>ca. 29 Wohnungen</td><td>Altersgerecht, bezahlbar, interne Wechselangebote</td></tr>
+                    <tr><td>3–3.5 Zi</td><td>ca. 78 Wohnungen</td><td>Nicht einfach alte 3-Zimmer-Logik reproduzieren</td></tr>
+                    <tr><td>4–4.5 Zi</td><td>ca. 25 Wohnungen</td><td>Familien, Belegung, unterbelegte Grosswohnungen freispielen</td></tr>
+                    <tr><td>5–6.5 Zi</td><td>ca. 8 Wohnungen</td><td>Familien mit 3+ Kindern, WG, Cluster prüfen</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+
+            <details>
+              <summary>6. Plan-Compliance: Aussenräume und Zimmergrössen systematisch prüfen</summary>
+              <div class="detail-body">
+                <p>Das Programm fordert pro Wohnung einen privaten Aussenraum zum Hof von mindestens 8 m². In den 2017er Planlabels erscheinen einzelne Aussenräume unter 8 m², z.B. 5 m², 6 m² oder 7.5 m². Zudem erscheinen Zimmer um 10–11 m².</p>
+                <p>Das ist nicht automatisch ein Ausschlussgrund, aber ein klarer Prüflauf: Jede Wohnung muss gegen Programm, SIA 500 (Hindernisfreie Bauten), Möblierbarkeit, Lärm und flexible Nutzung kontrolliert werden.</p>
+              </div>
+            </details>
+
+            <details>
+              <summary>7. Erdgeschoss ist überprogrammiert</summary>
+              <div class="detail-body">
+                <p>Café, Bistro, Enoteca, Bäckerei/Brauerei, Quartierladen, Velowerkstatt, Musik-/Tanzraum, BGO-Geschäftsstelle, Technische Betriebe, Krippe und weitere Gewerbe ergeben eine lebendige Vision, aber auch hohe operative Unsicherheit.</p>
+                <table>
+                  <thead><tr><th>Nutzung</th><th>Prüfung</th></tr></thead>
+                  <tbody>
+                    <tr><td>Café / Bistro</td><td>Betreiber, Miete, Öffnungszeiten, Lärm, Aussenfläche</td></tr>
+                    <tr><td>Gewerbe</td><td>Nachfrage, Unterteilbarkeit, spätere Umnutzung</td></tr>
+                    <tr><td>Krippe</td><td>Zugang, Aussenraum, Lärmtrennung, Betrieb</td></tr>
+                    <tr><td>BGO / Technische Betriebe</td><td>Flächenbedarf 2026 prüfen, nicht aus alter Logik übernehmen</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </details>
+
+            <details>
+              <summary>8. Dachgemeinschaft und Tiefgarage sind strategische Kosten-/Betriebsthemen</summary>
+              <div class="detail-body">
+                <p>Der Dachgemeinschaftsraum und die grosse Dachterrasse sind attraktiv, aber wartungs- und konfliktanfällig. Die Tiefgarage unter beiden Häusern ist teuer, CO₂-intensiv und muss mit dem heutigen Mobilitätsverständnis verglichen werden.</p>
+                <ul>
+                  <li>Dach: Abendnutzung, Lärm, Reinigung, Sicherheit, Zugang, Betriebskosten.</li>
+                  <li>Garage: Aushub, Kosten pro Stellplatz, Baum-/Wurzelräume, Regenwasser, Mobilitätskonzept.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section id="strategie">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="tag">Strategie</span>
+              <h2>Was jetzt zuerst geklärt werden muss.</h2>
+            </div>
+            <p>Die nächste Phase sollte nicht mit einem Lieblingsprojekt starten, sondern mit einer belastbaren Entscheidungslogik.</p>
+          </div>
+
+          <div class="grid-2">
+            <article class="panel">
+              <h3>1. Neue Bestellung formulieren</h3>
+              <ul>
+                <li>Ziel-Wohnungsspiegel</li>
+                <li>maximale Mietzins-/Kostenlogik</li>
+                <li>Hindernisfreiheitsziel</li>
+                <li>Bestandserhalt vs Ersatzkriterien</li>
+                <li>Netto-Null / graue Energie</li>
+                <li>Mobilität und Parkierung</li>
+                <li>Gemeinschafts- und Gewerbeflächen</li>
+              </ul>
+            </article>
+            <article class="panel">
+              <h3>2. Datenbasierter Wohnungsspiegel</h3>
+              <ul>
+                <li>Haushaltsgrössen und Altersstruktur</li>
+                <li>Unterbelegung und interne Wechselwünsche</li>
+                <li>Familienbedarf 4.5/5.5 Zimmer</li>
+                <li>Seniorenbedarf 2.5/3.5 Zimmer</li>
+                <li>Bezahlbarkeit pro m² und pro Haushalt</li>
+              </ul>
+            </article>
+            <article class="panel">
+              <h3>3. Recht, Lärm, Ortsbild und Brandschutz neu prüfen</h3>
+              <ul>
+                <li>USG (Umweltschutzgesetz), LSV (Lärmschutz-Verordnung) und aktuelle Vollzugspraxis: Lärmnachweis früh mit Kanton und Stadt Zürich abstimmen.</li>
+                <li>BZO (Bau- und Zonenordnung) der Stadt Zürich: Zone, Ausnützung, Gebäudehöhe, Grenzabstände, Wohnanteil, Freiraum, Erschliessung und negative Vorwirkung laufender Revisionen prüfen.</li>
+                <li>IGW (Immissionsgrenzwerte) am offenen Fenster lärmempfindlicher Räume</li>
+                <li>allfällige Ausnahmebewilligungen nach LSV (Lärmschutz-Verordnung), sauber begründet und wohnungsweise dokumentiert</li>
+                <li>Ortsbild, ISOS (Bundesinventar der schützenswerten Ortsbilder der Schweiz von nationaler Bedeutung) und Stadtbild gemäss kommunaler/kantonaler Beurteilung</li>
+                <li>Brandschutz nach VKF (Vereinigung Kantonaler Feuerversicherungen) / Brandschutzvorschriften und Feuerwehrzufahrt inklusive Aufstell- und Bewegungsflächen; Zürcher Vollzug und Vorgaben der zuständigen Brandschutzbehörde prüfen</li>
+              </ul>
+              <p class="mini-note">Schweizer Norm-/Praxischeck: Diese Seite nennt die massgebenden Prüffelder, ersetzt aber keinen offiziellen Lärm-, Brandschutz-, Ortsbild- oder Baurechtsnachweis.</p>
+            </article>
+            <article class="panel">
+              <h3>4. Varianten transparent vergleichen</h3>
+              <ul>
+                <li>Vollersatz</li>
+                <li>Teilersatz</li>
+                <li>Sanierung + Ergänzung</li>
+                <li>Etappierung</li>
+                <li>Minimalvariante als Referenz</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="kosten">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="tag">Kostenbenchmark</span>
+              <h2>Baukosten als Projektgrenze definieren.</h2>
+            </div>
+            <p>UWI26 braucht Kosten pro m², pro Wohnung, pro Parkplatz und als Mietzinswirkung. Eine Gesamtsumme allein reicht nicht.</p>
+          </div>
+
+          <details open>
+            <summary>Kostenrahmen für UWI26</summary>
+            <div class="detail-body">
+              <p>Arbeitsbenchmark für die frühe Diskussion: dichter gemeinnütziger Wohnungsbau in Zürich mit Lärmexposition, möglicher Tiefgarage, hindernisfreien Wohnungen, hoher Energieanforderung und komplexem städtischem Kontext. Die Werte sind als Ziel- und Warnkorridor zu verstehen und müssen im Vorprojekt durch Kostenplaner, Flächenberechnung und Baupreisindex validiert werden.</p>
+              <table>
+                <thead><tr><th>Kennwert</th><th>Guter Zielbereich</th><th>Noch akzeptabel</th><th>Warnzone / Begründungspflicht</th></tr></thead>
+                <tbody>
+                  <tr><td>BKP (Baukostenplan) 2 / m² GF (Geschossfläche)</td><td>CHF 4'200-5'200</td><td>CHF 5'200-6'200</td><td>&gt; CHF 6'200</td></tr>
+                  <tr><td>BKP (Baukostenplan) 1-9 / m² GF (Geschossfläche), exkl. Land</td><td>CHF 6'200-7'800</td><td>CHF 7'800-9'000</td><td>&gt; CHF 9'000</td></tr>
+                  <tr><td>BKP (Baukostenplan) 1-9 / m² Wohnfläche, exkl. Land</td><td>CHF 8'500-10'500</td><td>CHF 10'500-12'000</td><td>&gt; CHF 12'000</td></tr>
+                  <tr><td>Kosten pro Wohnung</td><td>CHF 650'000-850'000</td><td>CHF 850'000-1'000'000</td><td>&gt; CHF 1'000'000</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>UWI-Referenz aus 2018</summary>
+            <div class="detail-body">
+              <p>Die alte UWI-Planung hatte im Vorprojekt eine Kostenschätzung von rund CHF 83 Mio. für 125 Wohnungen. Das entspricht grob CHF 664'000 pro Wohnung, jedoch auf Kostenstand 2018 und ohne saubere Umrechnung auf GF (Geschossfläche), HNF (Hauptnutzfläche) oder Wohnfläche.</p>
+              <table>
+                <thead><tr><th>Annahme Wohnfläche</th><th>Rechnung</th><th>Resultat</th></tr></thead>
+                <tbody>
+                  <tr><td>75 m² × 125 Wohnungen</td><td>CHF 83 Mio. / 9'375 m²</td><td>ca. CHF 8'850/m² Wohnfläche</td></tr>
+                  <tr><td>80 m² × 125 Wohnungen</td><td>CHF 83 Mio. / 10'000 m²</td><td>ca. CHF 8'300/m² Wohnfläche</td></tr>
+                  <tr><td>85 m² × 125 Wohnungen</td><td>CHF 83 Mio. / 10'625 m²</td><td>ca. CHF 7'810/m² Wohnfläche</td></tr>
+                </tbody>
+              </table>
+              <p class="mini-note">Diese Werte sind nur eine Plausibilisierung. Für UWI26 muss die Kostenschätzung mit aktuellem Baupreisindex und klarer Flächenbasis neu aufgebaut werden.</p>
+            </div>
+          </details>
+
+          <details>
+            <summary>Was aus Genossenschaftsradar verwendbar ist</summary>
+            <div class="detail-body">
+              <p>Andere Jahresberichte zeigen oft Gebäude-Anlagekosten, Anlagewert, Gebäudeversicherungssumme und Anzahl Wohnungen. Diese Portfolio-Zahlen sind für Finanzvergleich und Kostenmiete relevant, aber nicht direkt als Neubau-CHF/m² verwendbar, weil alte Bestände, historische Anlagewerte, Abschreibungen und Mischportfolios enthalten sind.</p>
+              <table>
+                <thead><tr><th>Quelle</th><th>Gefundene Aussage</th><th>Bewertung</th></tr></thead>
+                <tbody>
+                  <tr><td>BGO UWI 2018</td><td>CHF 83 Mio. Vorprojekt, zuvor CHF 80 Mio. +/-25%, später +/-15%</td><td>Direkt relevant für UWI</td></tr>
+                  <tr><td>BGO UWI 2018</td><td>Zweites Untergeschoss hätte ca. CHF 1.7 Mio. Mehrkosten verursacht</td><td>Wichtig für Parkierung und Tiefgaragenstrategie</td></tr>
+                  <tr><td>ABZ, GBMZ, Waidmatt, PWG, mehr als wohnen</td><td>Anlagekosten und Portfoliokennzahlen vorhanden</td><td>Nur indirekter Benchmark, nicht als Neubaukosten/m² übernehmen</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Entscheidungsregeln für Baukosten</summary>
+            <div class="detail-body">
+              <ul>
+                <li>Jede Variante muss BKP (Baukostenplan) 2, BKP 1-9, GF (Geschossfläche), HNF (Hauptnutzfläche), Wohnfläche und Anzahl Wohnungen separat ausweisen.</li>
+                <li>Jede Variante muss Kosten pro Wohnung und Mietzinswirkung pro Wohnungstyp zeigen.</li>
+                <li>Tiefgarage separat rechnen: Kosten pro Parkplatz, Kosten pro zusätzlichem Untergeschoss, Einfluss auf Aushub, CO₂, Bäume, Wasser und Miete.</li>
+                <li>Warnwert: über CHF 12'000/m² Wohnfläche exkl. Land braucht es eine explizite Begründung, eine günstigere Gegenvariante und eine Mietzinsfolgenrechnung.</li>
+                <li>Etappierung nur akzeptieren, wenn soziale Vorteile die Mehrkosten durch längere Bauzeit, Provisorien und Komplexität nachvollziehbar rechtfertigen.</li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <section id="varianten">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="tag">Variantenmatrix</span>
+              <h2>Entscheiden mit Vergleich, nicht mit Bauchgefühl.</h2>
+            </div>
+            <p>Die Matrix ist ein Arbeitsmodell für Machbarkeitsstudie, Mitwirkung und GV-Vorlage.</p>
+          </div>
+
+          <div class="panel">
+            <table>
+              <thead>
+                <tr>
+                  <th>Variante</th>
+                  <th>Wohnraumpotenzial</th>
+                  <th>Kostenrisiko</th>
+                  <th>CO₂ / Bestand</th>
+                  <th>Sozialer Eingriff</th>
+                  <th>Hauptfrage</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Vollersatz</td>
+                  <td><span class="badge good">hoch</span></td>
+                  <td><span class="badge bad">hoch</span></td>
+                  <td><span class="badge bad">graue Energie hoch</span></td>
+                  <td><span class="badge bad">hoch</span></td>
+                  <td>Ist der strategische Mehrwert gross genug?</td>
+                </tr>
+                <tr>
+                  <td>Vollersatz in Etappen</td>
+                  <td><span class="badge good">hoch</span></td>
+                  <td><span class="badge bad">sehr komplex</span></td>
+                  <td><span class="badge warn">abhängig</span></td>
+                  <td><span class="badge warn">reduziert</span></td>
+                  <td>Kann Etappierung technisch, finanziell und sozial funktionieren?</td>
+                </tr>
+                <tr>
+                  <td>Teilersatz</td>
+                  <td><span class="badge warn">mittel</span></td>
+                  <td><span class="badge warn">mittel/hoch</span></td>
+                  <td><span class="badge warn">besser</span></td>
+                  <td><span class="badge warn">mittel</span></td>
+                  <td>Welche Teile sind erhaltenswert und welche verhindern die Ziele?</td>
+                </tr>
+                <tr>
+                  <td>Sanierung + Ergänzung</td>
+                  <td><span class="badge warn">niedrig/mittel</span></td>
+                  <td><span class="badge warn">mittel</span></td>
+                  <td><span class="badge good">besser</span></td>
+                  <td><span class="badge good">tiefer</span></td>
+                  <td>Reicht die Wirkung für hindernisfreie Wohnungen und Verdichtung?</td>
+                </tr>
+                <tr>
+                  <td>Minimalinstandsetzung</td>
+                  <td><span class="badge bad">niedrig</span></td>
+                  <td><span class="badge good">tiefer</span></td>
+                  <td><span class="badge good">kurzfristig besser</span></td>
+                  <td><span class="badge good">tiefer</span></td>
+                  <td>Verfehlt diese Variante den strategischen Wohnbedarf?</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="dokumente">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <span class="tag">Quellen</span>
+              <h2>Referenzen auf reale Dokumente.</h2>
+            </div>
+            <p>Die Dokumente liegen in der BGO-Dokumentensammlung / Collection <code>bgo</code>. Seitenangaben sind Arbeitsreferenzen.</p>
+          </div>
+
+          <details class="sources-toggle">
+            <summary>Referenzen auf reale Dokumente</summary>
+            <div class="detail-body">
+              <div class="source-grid">
+            <article class="source-card">
+              <strong>1 Arbeitspapier Parkierung_2014.pdf</strong>
+              <p>Grundlagen Parkierung, Parkplatzstrategie, Minimalbedarf, Potentialanalyse, Sicherung vorhandener Parkplätze. Relevant für Mobilitäts-/Garagenstrategie.</p>
+            </article>
+            <article class="source-card">
+              <strong>2 Wettbewerbsprogramm_2016.pdf</strong>
+              <p>Programm Projektwettbewerb. Wichtige Stellen: Perimeter S.15, Baurecht S.18–20, Erschliessung/Parkierung S.20–21, Lärm S.23–25, Wohnungsschlüssel S.30–32, Gewerbe/Krippe S.35–36.</p>
+            </article>
+            <article class="source-card">
+              <strong>3 Überarbeitung Wettbewerb_2017.pdf</strong>
+              <p>Projekt «Jim Knopf». Enthält Situation, Grundrisse, Wohnungsspiegel, Fassaden, Schnitte, Lärmtypologie, Dachgemeinschaft, EG-Nutzungen und Detailschnitt.</p>
+            </article>
+            <article class="source-card">
+              <strong>A4_Abstimmungsbuechlein_RZ_25_05.pdf</strong>
+              <p>GV 2025, Traktandum 8: Neuplanung Untere Winterthurerstrasse. Wichtige Stellen: S.19–20 mit Auftrag, Begründung, Lärmgesetz-Hinweis, Etappierung und Vorgehenskonzept.</p>
+            </article>
+            <article class="source-card">
+              <strong>BGOAKTUELL_Nr_91_Oktober_2025.pdf</strong>
+              <p>Aktueller Stand nach GV 2025. Wichtige Stellen: Editorial S.3 und Bauprojekte S.6 mit Machbarkeitsstudie, Umgang mit Bestand und Mitwirkung.</p>
+            </article>
+            <article class="source-card">
+              <strong>260323 Kick-off Arbeitsgruppe Ergebnisnotiz digital.pdf</strong>
+              <p>Mitwirkung UWI, Kick-off 23.03.2026. Wichtige Stellen: Ausgangslage S.6, Zweck der Partizipation S.7–8, Zusammenspiel MBS/Mitwirkung S.9–10.</p>
+            </article>
+            <article class="source-card">
+              <strong>26-04-28 Entwurf Regeln Zusammenarbeit AG Uwi Versand.pdf</strong>
+              <p>Regeln der Zusammenarbeit für die Mitwirkung. Relevant für Prozess, Rollen, Transparenz und Rückbindung.</p>
+            </article>
+            <article class="source-card">
+              <strong>Traktandenliste-Generalversammlung-2026_final.pdf</strong>
+              <p>Referenz für Vorgehens- und Mitwirkungskonzept Untere Winterthurerstrasse im Rahmen GV 2026.</p>
+            </article>
+            <article class="source-card">
+              <strong>BZO Stadt Zürich – Bau- und Zonenordnung</strong>
+              <p>Offizielle Anforderung für die Prüfung gegen die kommunale Bau- und Nutzweise: Zone, Nutzung, Bebauung, Ergänzungspläne, Katasterauskunft, ÖREB-Kataster und negative Vorwirkung der laufenden BZO-Revision. Quelle: https://www.stadt-zuerich.ch/de/planen-und-bauen/stadtplanung/bau-zonenordnung.html</p>
+            </article>
+              </div>
+            </div>
+          </details>
+
+
+          <article class="panel" style="margin-top:16px">
+            <h3>Präsentationsfazit</h3>
+            <p>UWI26 sollte nicht als Fortsetzung eines alten Wettbewerbsprojekts präsentiert werden, sondern als neue strategische Bestellung: mit Variantenvergleich, belastbarem Kostenrahmen, Lärm- und BZO-Prüfung, klarer Wohnungsstrategie und nachvollziehbarer Mietzinswirkung.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap">
+        <strong>BIMfabrik · UWI26</strong><br />
+        Arbeitsübersicht zur strategischen Vorbereitung. Stand: Juni 2026.
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const PASSWORD = "bgobgo";
+    const KEY = "bimfabrik-uwi26-unlocked";
+    const form = document.getElementById("gateForm");
+    const input = document.getElementById("password");
+    const error = document.getElementById("error");
+
+    function unlock() {
+      document.body.classList.add("unlocked");
+      try { sessionStorage.setItem(KEY, "1"); } catch (e) {}
+    }
+
+    try {
+      if (sessionStorage.getItem(KEY) === "1") unlock();
+    } catch (e) {}
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (input.value === PASSWORD) {
+        unlock();
+      } else {
+        error.textContent = "Falsches Passwort.";
+        input.select();
+      }
+    });
+  </script>
+</body>
+</html>
