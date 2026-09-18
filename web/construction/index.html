@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/construction/construction.css?v=city05">
+  <link rel="stylesheet" href="/construction/construction.css?v=city06">
 </head>
 <body>
   <main class="construction-shell">
@@ -21,7 +21,10 @@
         <span class="brand-mark">BF</span>
         <span><strong>BIMfabrik</strong><small>BIM, Digital Twin & Lifecycle-Daten</small></span>
       </a>
-      <span class="build-status"><i></i> SYSTEM UPDATE</span>
+      <div class="topbar-actions">
+        <span class="build-status"><i></i> SYSTEM UPDATE</span>
+        <button class="contact-trigger" id="contact-trigger" type="button">KONTAKT</button>
+      </div>
     </header>
 
     <section class="hero" aria-label="Interaktives 3D-Stadtmodell">
@@ -47,21 +50,28 @@
         <h2 id="join-title">Bleiben Sie in der Schleife.</h2>
         <p>Erfahren Sie als Erste, wenn BIMfabrik wieder live ist und wir neue Pilotpartner aufnehmen.</p>
       </div>
-      <form action="https://formspree.io/f/xzdanybz" method="POST">
-        <label for="email">Geschäftliche E-Mail</label>
-        <div class="form-row">
-          <input id="email" name="email" type="email" autocomplete="email" placeholder="name@firma.ch" required>
-          <button type="submit">Auf die Liste</button>
-        </div>
-        <input type="hidden" name="product" value="BIMfabrik Früher Zugang">
-        <input type="hidden" name="_redirect" value="https://bimfabrik.ch/construction/thanks/">
-        <input type="hidden" name="_language" value="de">
-        <p class="privacy">Nur Updates zu BIMfabrik. Kein Spam.</p>
-      </form>
     </section>
 
     <footer><span>© BIMfabrik</span><a href="/impressum/">Impressum</a></footer>
   </main>
-  <script type="module" src="/construction/construction.js?v=city04"></script>
+  <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title">
+    <div class="dialog-title-row">
+      <div><p class="eyebrow"><span></span> FRÜHER ZUGANG</p><h2 id="contact-title">Bleiben Sie in der Schleife.</h2></div>
+      <button class="dialog-close" id="dialog-close" type="button" aria-label="Kontaktfenster schliessen">×</button>
+    </div>
+    <p>Erfahren Sie als Erste, wenn BIMfabrik wieder live ist und wir neue Pilotpartner aufnehmen.</p>
+    <form action="https://formspree.io/f/xzdanybz" method="POST">
+      <label for="email">Geschäftliche E-Mail</label>
+      <div class="form-row">
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="name@firma.ch" required>
+        <button type="submit">Auf die Liste</button>
+      </div>
+      <input type="hidden" name="product" value="BIMfabrik Früher Zugang">
+      <input type="hidden" name="_redirect" value="https://bimfabrik.ch/construction/thanks/">
+      <input type="hidden" name="_language" value="de">
+      <p class="privacy">Nur Updates zu BIMfabrik. Kein Spam.</p>
+    </form>
+  </dialog>
+  <script type="module" src="/construction/construction.js?v=city06"></script>
 </body>
 </html>
