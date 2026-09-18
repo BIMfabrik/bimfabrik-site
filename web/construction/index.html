@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="BIMfabrik baut an der nächsten Version seiner digitalen Datenebene.">
+  <meta name="robots" content="noindex, follow">
+  <title>BIMfabrik — Im Aufbau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/construction/construction.css">
+</head>
+<body>
+  <main class="construction-shell">
+    <canvas id="signal-field" aria-hidden="true"></canvas>
+    <div class="grid" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/construction/" aria-label="BIMfabrik Startseite">
+        <span class="brand-mark">BF</span>
+        <span><strong>BIMfabrik</strong><small>BIM, Digital Twin & Lifecycle-Daten</small></span>
+      </a>
+      <span class="build-status"><i></i> SYSTEM UPDATE</span>
+    </header>
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="copy">
+        <p class="eyebrow"><span></span> NÄCHSTE DATENEBENE</p>
+        <h1 id="hero-title">Wir bauen an<br>klareren Verbindungen.</h1>
+        <p class="intro">BIMfabrik entwickelt eine neue digitale Oberfläche für Gebäude-, Betriebs- und Portfoliodaten. Bald wieder online.</p>
+      </div>
+
+      <aside class="signal-card" aria-label="Systemstatus">
+        <div class="card-top"><span>BUILDING DATA LAYER</span><b>v.02</b></div>
+        <div class="signal-graph" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="card-bottom"><span>VERNETZEN</span><span>PRÜFEN</span><span>ENTSCHEIDEN</span></div>
+      </aside>
+    </section>
+
+    <section class="join" aria-labelledby="join-title">
+      <div>
+        <p class="eyebrow"><span></span> FRÜHER ZUGANG</p>
+        <h2 id="join-title">Bleiben Sie in der Schleife.</h2>
+        <p>Erfahren Sie als Erste, wenn BIMfabrik wieder live ist und wir neue Pilotpartner aufnehmen.</p>
+      </div>
+      <form action="https://formspree.io/f/xzdanybz" method="POST">
+        <label for="email">Geschäftliche E-Mail</label>
+        <div class="form-row">
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="name@firma.ch" required>
+          <button type="submit">Auf die Liste</button>
+        </div>
+        <input type="hidden" name="product" value="BIMfabrik Früher Zugang">
+        <input type="hidden" name="_redirect" value="https://bimfabrik.ch/construction/thanks/">
+        <input type="hidden" name="_language" value="de">
+        <p class="privacy">Nur Updates zu BIMfabrik. Kein Spam.</p>
+      </form>
+    </section>
+
+    <footer><span>© BIMfabrik</span><a href="/impressum/">Impressum</a></footer>
+  </main>
+  <script src="/construction/construction.js"></script>
+</body>
+</html>
