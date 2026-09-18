@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/construction/construction.css?v=3d01">
+  <link rel="stylesheet" href="/construction/construction.css?v=city01">
 </head>
 <body>
   <main class="construction-shell">
@@ -24,9 +24,20 @@
       <span class="build-status"><i></i> SYSTEM UPDATE</span>
     </header>
 
-    <section class="hero" aria-label="Animierte Datenlandschaft">
+    <section class="hero" aria-label="Interaktives 3D-Stadtmodell">
       <div class="webgl-stage">
-        <canvas id="signal-field" aria-hidden="true"></canvas>
+        <canvas id="city-viewer" aria-label="Interaktives dreidimensionales Quartiermodell. Ziehen zum Drehen, scrollen zum Zoomen."></canvas>
+        <div class="viewer-copy" aria-hidden="true">
+          <span class="viewer-kicker">01 / QUARTIERMODELL</span>
+          <strong>DIGITAL TWIN</strong>
+          <span>PLANUNG · BETRIEB · DATEN</span>
+        </div>
+        <button class="reset-view" id="reset-view" type="button" aria-label="Ansicht zurücksetzen"><span aria-hidden="true">↺</span> RESET VIEW</button>
+        <p class="viewer-hint">Ziehen zum Drehen <span>·</span> Scrollen zum Zoomen</p>
+        <div class="webgl-fallback" hidden>
+          <strong>3D-Ansicht nicht verfügbar</strong>
+          <span>Ihr Browser unterstützt WebGL nicht. BIMfabrik ist trotzdem bald wieder für Sie da.</span>
+        </div>
       </div>
     </section>
 
@@ -51,6 +62,6 @@
 
     <footer><span>© BIMfabrik</span><a href="/impressum/">Impressum</a></footer>
   </main>
-  <script src="/construction/construction.js?v=3d01"></script>
+  <script type="module" src="/construction/construction.js?v=city01"></script>
 </body>
 </html>

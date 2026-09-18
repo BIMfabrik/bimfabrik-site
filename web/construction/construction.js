@@ -1,23 +1,48 @@
-(() => {
-  const canvas = document.getElementById("signal-field");
-  const gl = canvas.getContext("webgl", { alpha: false, antialias: true });
-  if (!gl || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js";
 
-  const vertex = "attribute vec2 p; void main(){ gl_Position=vec4(p,0.,1.); }";
-  const fragment = `precision mediump float;
-uniform vec2 r; uniform float t; uniform vec2 m;
-mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
-float box(vec3 p,vec3 b){vec3 q=abs(p)-b;return length(max(q,0.))+min(max(q.x,max(q.y,q.z)),0.);}
-float object(vec3 p){float d=box(p-vec3(0.,-.42,0.),vec3(1.46,.08,1.05));d=min(d,box(p-vec3(-.78,.13,-.44),vec3(.18,.48,.18)));d=min(d,box(p-vec3(-.30,.32,.20),vec3(.19,.67,.19)));d=min(d,box(p-vec3(.18,.10,-.30),vec3(.22,.45,.22)));d=min(d,box(p-vec3(.66,.38,.26),vec3(.17,.73,.17)));d=min(d,box(p-vec3(.83,-.02,-.67),vec3(.14,.30,.14)));d=min(d,box(p-vec3(-.12,.88,-.08),vec3(.38,.05,.38)));return d;}
-float scene(vec3 p){return min(object(p),p.y+.58);}
-vec3 normal(vec3 p){vec2 e=vec2(.002,0.);return normalize(vec3(scene(p+e.xyy)-scene(p-e.xyy),scene(p+e.yxy)-scene(p-e.yxy),scene(p+e.yyx)-scene(p-e.yyx)));}
-void main(){vec2 uv=(gl_FragCoord.xy-.5*r)/r.y;float angle=t*.17+(m.x-.5)*.58;vec3 ro=vec3(3.3,2.15,4.15);ro.xz=rot(angle)*ro.xz;vec3 target=vec3(0.,.15,0.);vec3 f=normalize(target-ro);vec3 right=normalize(cross(f,vec3(0.,1.,0.)));vec3 up=cross(right,f);vec3 rd=normalize(f+uv.x*right*1.1+uv.y*up*1.1);float travel=0.;float hit=0.;vec3 pos=ro;for(int i=0;i<64;i++){pos=ro+rd*travel;float d=scene(pos);if(d<.002){hit=1.;break;}travel+=d*.78;if(travel>12.)break;}vec3 col=vec3(.035,.037,.035)+vec3(.035,.028,.006)*(1.-smoothstep(.2,1.2,length(uv)));if(hit>.5){vec3 n=normal(pos);vec3 light=normalize(vec3(-2.,4.,3.));float diffuse=max(dot(n,light),.0);float rim=pow(1.-max(dot(n,-rd),.0),2.4);float floorHit=step(pos.y,-.575);vec3 material=mix(vec3(.14,.15,.13),vec3(.72,.46,.035),floorHit);float top=smoothstep(.65,1.,n.y);material=mix(material,vec3(.92,.70,.14),top*.55);col=material*(.18+.82*diffuse)+rim*vec3(.85,.55,.08)*.45;if(floorHit>.5){vec2 g=pos.xz;float lines=max(1.-smoothstep(.0,.018,abs(fract(g.x*1.5)-.5)),1.-smoothstep(.0,.018,abs(fract(g.y*1.5)-.5)));col+=lines*vec3(.28,.20,.04);}}float glow=0.;for(int i=0;i<5;i++){float fi=float(i);vec3 node=vec3(sin(fi*2.1)*.82,.08+fi*.18,cos(fi*1.7)*.58);glow+=.003/(length(pos-node)+.012);}col+=glow*vec3(1.,.55,.03);col=pow(col,vec3(.86));gl_FragColor=vec4(col,1.);}`;
-  const compile = (type, source) => { const shader = gl.createShader(type); gl.shaderSource(shader, source); gl.compileShader(shader); return shader; };
-  const program = gl.createProgram(); gl.attachShader(program, compile(gl.VERTEX_SHADER, vertex)); gl.attachShader(program, compile(gl.FRAGMENT_SHADER, fragment)); gl.linkProgram(program); gl.useProgram(program);
-  const buffer = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buffer); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
-  const position = gl.getAttribLocation(program, "p"); gl.enableVertexAttribArray(position); gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-  const resolution = gl.getUniformLocation(program,"r"), time = gl.getUniformLocation(program,"t"), mouse = gl.getUniformLocation(program,"m"); let pointer=[.5,.5];
-  const resize = () => { const rect=canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio,1.5); canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;gl.viewport(0,0,canvas.width,canvas.height); };
-  addEventListener("resize",resize);canvas.addEventListener("pointermove",event=>{const rect=canvas.getBoundingClientRect();pointer=[(event.clientX-rect.left)/rect.width,1-(event.clientY-rect.top)/rect.height];});resize();
-  const draw = now => {gl.uniform2f(resolution,canvas.width,canvas.height);gl.uniform1f(time,now/1000);gl.uniform2f(mouse,pointer[0],pointer[1]);gl.drawArrays(gl.TRIANGLES,0,3);requestAnimationFrame(draw);};requestAnimationFrame(draw);
-})();
+const canvas = document.querySelector("#city-viewer"), stage = document.querySelector(".webgl-stage");
+const fallback = document.querySelector(".webgl-fallback"), resetButton = document.querySelector("#reset-view");
+const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+let renderer;
+try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false, powerPreference: "high-performance" }); }
+catch (_) { fallback.hidden = false; canvas.hidden = true; resetButton.hidden = true; document.querySelector(".viewer-hint").hidden = true; throw new Error("WebGL unavailable"); }
+renderer.setPixelRatio(Math.min(devicePixelRatio, 1.6)); renderer.setClearColor(0x151512); renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap; renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.22;
+
+const scene = new THREE.Scene(); scene.fog = new THREE.FogExp2(0x151512, .045);
+const camera = new THREE.PerspectiveCamera(32, 1, .1, 130), target = new THREE.Vector3(0, .7, 0);
+const initial = { azimuth: -.67, elevation: .72, distance: 21 }; let { azimuth, elevation, distance } = initial;
+scene.add(new THREE.HemisphereLight(0xe1c690, 0x11120e, 1.55));
+const sun = new THREE.DirectionalLight(0xffe6ac, 3.2); sun.position.set(-13, 19, 10); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, { left:-17, right:17, top:17, bottom:-17 }); scene.add(sun);
+const fill = new THREE.PointLight(0xffcf00, 4, 24, 2); fill.position.set(2, 5, -5); scene.add(fill);
+
+const city = new THREE.Group(); city.rotation.y = -.12; scene.add(city);
+const mat = {
+  ground:new THREE.MeshStandardMaterial({ color:0x292a25, roughness:.92, metalness:.06 }), road:new THREE.MeshStandardMaterial({ color:0x121310, roughness:.84 }), lot:new THREE.MeshStandardMaterial({ color:0x1c1d19, roughness:.91 }),
+  building:new THREE.MeshStandardMaterial({ color:0x3b3d36, roughness:.74, metalness:.14 }), light:new THREE.MeshStandardMaterial({ color:0x55564c, roughness:.68, metalness:.16 }),
+  yellow:new THREE.MeshStandardMaterial({ color:0xffbf00, emissive:0x6b4600, emissiveIntensity:.85, roughness:.44, metalness:.18 }), tree:new THREE.MeshStandardMaterial({ color:0x44493a, roughness:.98 }), trunk:new THREE.MeshStandardMaterial({ color:0x25261f, roughness:1 })
+};
+function add(geometry, material, x, y, z) { const item = new THREE.Mesh(geometry, material); item.position.set(x,y,z); item.castShadow = item.receiveShadow = true; city.add(item); return item; }
+add(new THREE.BoxGeometry(24,.42,18), mat.ground, 0,-.28,0);
+[[23.6,2.05,0,.65],[2.1,17.6,1.5,0],[18.5,1.22,-2.1,-5.05]].forEach(([w,d,x,z]) => add(new THREE.BoxGeometry(w,.035,d),mat.road,x,-.035,z));
+add(new THREE.BoxGeometry(6.4,.04,4.35),mat.lot,-4.25,.005,3.05); add(new THREE.CylinderGeometry(2.13,2.13,.045,48),mat.lot,-5.9,.02,-3.38);
+const lineMat = new THREE.LineDashedMaterial({ color:0x88752b, dashSize:.36, gapSize:.34, transparent:true, opacity:.58 });
+function roadLine(a,b) { const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints([a,b]),lineMat); l.computeLineDistances(); l.position.y=.003; city.add(l); }
+roadLine(new THREE.Vector3(-11,0,.65),new THREE.Vector3(11,0,.65)); roadLine(new THREE.Vector3(1.5,0,-8),new THREE.Vector3(1.5,0,8)); roadLine(new THREE.Vector3(-11,0,-5.05),new THREE.Vector3(7,0,-5.05));
+
+const buildingGeo = new THREE.BoxGeometry(1,1,1), roofGeo = new THREE.BoxGeometry(1.02,.09,1.02), nodes=[];
+function building({x,z,w,d,h,accent=false,light=false}) { const body=add(buildingGeo,light?mat.light:mat.building,x,h/2,z); body.scale.set(w,h,d); const roof=add(roofGeo,accent?mat.yellow:mat.lot,x,h+.055,z); roof.scale.set(w,1,d); if(accent){const band=add(new THREE.BoxGeometry(w+.025,.12,d+.025),mat.yellow,x,h*.7,z); band.castShadow=false; nodes.push(new THREE.Vector3(x,h+.22,z));} }
+[
+[-8.3,3.2,2.1,2.4,3.3,1],[-5.7,4.4,1.35,2.1,2.15],[-4,5.5,1.9,1.3,4.65,0,1],[-1.55,4.15,2.15,2.5,2.72,1],[4.2,4.3,2.15,2.35,4.25],[7.2,4,2.85,2.5,2.72,0,1],[9.3,5.6,1.3,1.45,5.45,1],[-8.8,-1.7,2.45,2.2,2.4],[-4.45,-1.75,1.75,2.25,5.05,1],[-1.1,-2,1.35,2.65,3.35],[4.25,-2.15,2.7,2.2,5.75,1],[7.65,-1.95,2,2.4,3.45],[10,-2.3,1.35,1.75,4.5],[-8.65,-7.05,2.45,1.3,3.05],[-5.45,-6.75,1.6,1.75,5.45,0,1],[-2.75,-7,2.1,1.4,2.4],[4,-7.15,2.2,1.4,3.75],[6.95,-6.85,1.85,1.8,5.25,1]
+].forEach(([x,z,w,d,h,accent,light])=>building({x,z,w,d,h,accent:!!accent,light:!!light}));
+function tree(x,z,size=1){ const t=add(new THREE.CylinderGeometry(.08*size,.11*size,.58*size,8),mat.trunk,x,.29*size,z);t.castShadow=false;const c=add(new THREE.DodecahedronGeometry(.42*size),mat.tree,x,.75*size,z);c.scale.y=1.28; }
+[[-6.1,2.55,1.2],[-5.2,2.5,.78],[-4.35,2.85,.9],[-6.45,-3.2,1.15],[-5.5,-4.2,.75],[-6.4,-4.55,.8],[-2.3,1.8,.9],[2.7,2.85,1.1],[3,1.8,.7],[8.9,-4.5,1.05],[9.75,-5.45,.7]].forEach(v=>tree(...v));
+const edges = new THREE.EdgesGeometry(new THREE.BoxGeometry(1,.045,1)); [[-5.9,-3.38,4.1,4.1],[-4.25,3.05,6.4,4.35],[6.85,3.85,7.1,5.25]].forEach(([x,z,w,d])=>{const e=new THREE.LineSegments(edges,new THREE.LineBasicMaterial({color:0xffcf00,transparent:true,opacity:.39}));e.position.set(x,.075,z);e.scale.set(w,1,d);city.add(e);});
+const pulse = new THREE.Mesh(new THREE.SphereGeometry(.115,12,12),new THREE.MeshBasicMaterial({color:0xffcf00,transparent:true,opacity:.95})); pulse.add(new THREE.PointLight(0xffcf00,3,4));city.add(pulse); const path=new THREE.CatmullRomCurve3([nodes[0],nodes[2],nodes[4],nodes[1],nodes[5]],true,"catmullrom",.2);
+const haze=new THREE.Mesh(new THREE.PlaneGeometry(60,16),new THREE.MeshBasicMaterial({color:0xb49857,transparent:true,opacity:.052,depthWrite:false}));haze.position.set(0,6.5,-12);scene.add(haze);
+function updateCamera(){const flat=Math.cos(elevation)*distance;camera.position.set(Math.sin(azimuth)*flat,Math.sin(elevation)*distance+1.2,Math.cos(azimuth)*flat);camera.lookAt(target);}
+function render(){updateCamera();renderer.render(scene,camera);}
+function resize(){const {width,height}=stage.getBoundingClientRect();renderer.setSize(width,height,false);camera.aspect=width/height;camera.updateProjectionMatrix();render();}
+new ResizeObserver(resize).observe(stage); addEventListener("resize",resize,{passive:true});
+let dragging=false,last={x:0,y:0}; canvas.addEventListener("pointerdown",e=>{dragging=true;last={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});canvas.addEventListener("pointermove",e=>{if(!dragging)return;azimuth-=(e.clientX-last.x)*.008;elevation=THREE.MathUtils.clamp(elevation+(e.clientY-last.y)*.008,.27,1.25);last={x:e.clientX,y:e.clientY};render();});["pointerup","pointercancel"].forEach(type=>canvas.addEventListener(type,()=>dragging=false));canvas.addEventListener("wheel",e=>{e.preventDefault();distance=THREE.MathUtils.clamp(distance+e.deltaY*.012,13,32);render();},{passive:false});resetButton.addEventListener("click",()=>{({azimuth,elevation,distance}=initial);render();});
+let visible=true,frame=0,previous=0;new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;if(visible)requestFrame();},{threshold:.01}).observe(stage);function requestFrame(){if(!frame&&visible&&!document.hidden&&!reduced)frame=requestAnimationFrame(animate);}function animate(now){frame=0;const delta=Math.min((now-previous)/1000||0,.05);previous=now;if(!dragging)azimuth+=delta*.055;pulse.position.copy(path.getPointAt((now*.000045)%1));pulse.scale.setScalar(1+Math.sin(now*.006)*.28);render();requestFrame();}document.addEventListener("visibilitychange",()=>{if(!document.hidden){previous=performance.now();requestFrame();}});updateCamera();resize();requestFrame();
