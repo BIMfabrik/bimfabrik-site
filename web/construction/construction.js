@@ -40,13 +40,13 @@ function tree(x,z,size=1){ const t=add(new THREE.CylinderGeometry(.08*size,.11*s
 const edges = new THREE.EdgesGeometry(new THREE.BoxGeometry(1,.045,1)); [[-5.9,-3.38,4.1,4.1],[-4.25,3.05,6.4,4.35],[6.85,3.85,7.1,5.25]].forEach(([x,z,w,d])=>{const e=new THREE.LineSegments(edges,new THREE.LineBasicMaterial({color:0xffcf00,transparent:true,opacity:.39}));e.position.set(x,.075,z);e.scale.set(w,1,d);city.add(e);});
 const trainSpecs = [
   { color:0xffcf00, speed:.000055, phase:0, path:new THREE.CatmullRomCurve3([new THREE.Vector3(-10,.24,.65),new THREE.Vector3(-4,.24,.65),new THREE.Vector3(1.5,.24,.65),new THREE.Vector3(1.5,.24,-5.05),new THREE.Vector3(-3,.24,-5.05),new THREE.Vector3(-8,.24,-5.05),new THREE.Vector3(-8,.24,.65)],true,"centripetal") },
-  { color:0x75e3ff, speed:.000043, phase:.31, path:new THREE.CatmullRomCurve3([new THREE.Vector3(-10,.24,-5.05),new THREE.Vector3(-5,.24,-5.05),new THREE.Vector3(1.5,.24,-5.05),new THREE.Vector3(1.5,.24,.65),new THREE.Vector3(7,.24,.65),new THREE.Vector3(10,.24,.65),new THREE.Vector3(5,.24,.65),new THREE.Vector3(-4,.24,.65)],true,"centripetal") },
-  { color:0xffa45b, speed:.000066, phase:.62, path:new THREE.CatmullRomCurve3([new THREE.Vector3(1.5,.24,7),new THREE.Vector3(1.5,.24,2),new THREE.Vector3(1.5,.24,-5.05),new THREE.Vector3(-4,.24,-5.05),new THREE.Vector3(-8,.24,-5.05),new THREE.Vector3(-8,.24,.65),new THREE.Vector3(-3,.24,.65),new THREE.Vector3(1.5,.24,.65)],true,"centripetal") }
+  { color:0x29e3ff, speed:.000043, phase:.31, path:new THREE.CatmullRomCurve3([new THREE.Vector3(-10,.24,-5.05),new THREE.Vector3(-5,.24,-5.05),new THREE.Vector3(1.5,.24,-5.05),new THREE.Vector3(1.5,.24,.65),new THREE.Vector3(7,.24,.65),new THREE.Vector3(10,.24,.65),new THREE.Vector3(5,.24,.65),new THREE.Vector3(-4,.24,.65)],true,"centripetal") },
+  { color:0xff623d, speed:.000066, phase:.62, path:new THREE.CatmullRomCurve3([new THREE.Vector3(1.5,.24,7),new THREE.Vector3(1.5,.24,2),new THREE.Vector3(1.5,.24,-5.05),new THREE.Vector3(-4,.24,-5.05),new THREE.Vector3(-8,.24,-5.05),new THREE.Vector3(-8,.24,.65),new THREE.Vector3(-3,.24,.65),new THREE.Vector3(1.5,.24,.65)],true,"centripetal") }
 ];
 const trains = trainSpecs.map(spec => {
-  const material = new THREE.MeshBasicMaterial({color:spec.color,transparent:true,opacity:.92});
-  const electrons = Array.from({length:12},(_,index)=>{const electron=new THREE.Mesh(new THREE.SphereGeometry(index%4===0?.115:.065,12,12),material);electron.userData.offset=index*.045;city.add(electron);return electron;});
-  const lights = [0,6].map(index=>{const light=new THREE.PointLight(spec.color,4.4,4.4,2);city.add(light);return {light,index};});
+  const material = new THREE.MeshBasicMaterial({color:spec.color,transparent:true,opacity:1});
+  const electrons = Array.from({length:12},(_,index)=>{const electron=new THREE.Mesh(new THREE.SphereGeometry(index%4===0?.14:.082,12,12),material);electron.userData.offset=index*.045;city.add(electron);return electron;});
+  const lights = [0,6].map(index=>{const light=new THREE.PointLight(spec.color,7,5.2,2);city.add(light);return {light,index};});
   return { ...spec, electrons, lights };
 });
 const haze=new THREE.Mesh(new THREE.PlaneGeometry(60,16),new THREE.MeshBasicMaterial({color:0xb49857,transparent:true,opacity:.052,depthWrite:false}));haze.position.set(0,6.5,-12);scene.add(haze);
